@@ -9,16 +9,16 @@ sys.path.append(scripts_public_path)
 from baixar_dados_srinfo import baixar_dados_srinfo
 from mover_arquivos import mover_arquivos_excel
 
-def main_contratos():
-    link = 'https://srinfo.embrapii.org.br/projects/contracts/'
+def main_macroentregas():
+    link = 'https://srinfo.embrapii.org.br/projects/project/workpackages/list/'
     numero_arquivos = baixar_dados_srinfo(link)
     print('Número de arquivos: ', numero_arquivos)
     pasta_download = r'C:\Users\milena.goncalves\Downloads'
     diretorio = current_dir
-    nome_arquivo = 'contratos'
+    nome_arquivo = 'macroentregas'
     mover_arquivos_excel(numero_arquivos, pasta_download, diretorio, nome_arquivo)
     print('Finalizado!')
 
 
 if __name__ == "__main__":
-    main_contratos()
+    main_macroentregas()

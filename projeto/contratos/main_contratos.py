@@ -1,7 +1,7 @@
-from baixar_dados_srinfo import baixar_dados_srinfo
-from mover_arquivos import mover_arquivos_excel
+from scripts_public.baixar_dados_srinfo import baixar_dados_srinfo
+from scripts_public.mover_arquivos import mover_arquivos_excel
 
-def teste():
+def main_contratos():
     link = 'https://srinfo.embrapii.org.br/projects/contracts/'
     numero_arquivos = baixar_dados_srinfo(link)
     print('Número de arquivos: ', numero_arquivos)
@@ -13,4 +13,4 @@ def teste():
 
 
 if __name__ == "__main__":
-    teste()
+    main_contratos()

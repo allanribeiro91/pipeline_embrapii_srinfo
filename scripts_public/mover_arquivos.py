@@ -5,7 +5,7 @@ from datetime import datetime
 
 def mover_arquivos_excel(numero_arquivos, pasta_download, diretorio, nome_arquivo):
 
-    data_raw = os.path.join(diretorio, 'data_raw')
+    data_raw = os.path.join(diretorio, 'step_1_data_raw')
     data_log = os.path.join(diretorio, 'data_log')
 
     # Mover arquivos da pasta data_raw para a pasta data_log

@@ -67,6 +67,7 @@ def baixar_dados_srinfo(link_listagem):
         option.click()
 
         carregar_dados_e_fazer_download(driver=driver)
+        numero_download = 1
 
         #Descobrir o número de páginas
         time.sleep(3)
@@ -84,11 +85,11 @@ def baixar_dados_srinfo(link_listagem):
                 next_page.click()
 
                 carregar_dados_e_fazer_download(driver=driver)
-
-        print("Download de dados concluído!")
-        time.sleep(3)
+                numero_download += 1
     finally:
         driver.quit()
+    
+    return numero_download
 
 def carregar_dados_e_fazer_download(driver):
     #Esperar até 90 segundos para carregar

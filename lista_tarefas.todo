@@ -1,0 +1,10 @@
+PIPELINE DE DADOS SRINFO:
+✔ 1. Fazer o download dos arquivos @done(24-07-18 10:49)
+    - Função: baixar_dados_srinfo
+✔ 2. Mover os arquivo para a pasta step_1_data_raw @done(24-07-18 10:52)
+    - Função: mover_arquivos
+☐ 3. Juntar os arquivos da pasta data_raw em um apenas e mover para stage_area
+    - Função: append_arquivos
+☐ 4. Transformar os dados nas tabelas desejadas
+☐ 5. Mover para o Sharepoint
+

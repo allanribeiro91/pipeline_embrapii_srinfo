@@ -1,5 +1,0 @@
-1. Acessar o SRInfo e fazer o login
-2. Ir no link:
-3. Selecionar todos os registros
-4. Fazer o download
-5. Mover o arquivo para a pasta empresas/data_raw

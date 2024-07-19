@@ -10,9 +10,8 @@ from scripts_public import baixar_e_juntar_arquivos
 
 def main_contratos():
     link = 'https://srinfo.embrapii.org.br/projects/contracts/'
-    pasta_download = r'C:\Users\allan.ribeiro\Downloads'
     nome_arquivo = 'contratos'
-    baixar_e_juntar_arquivos(link, pasta_download, current_dir, nome_arquivo)
+    baixar_e_juntar_arquivos(link, current_dir, nome_arquivo)
 
 
 if __name__ == "__main__":

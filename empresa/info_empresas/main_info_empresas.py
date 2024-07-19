@@ -8,11 +8,11 @@ sys.path.append(scripts_public_path)
 
 from scripts_public import baixar_e_juntar_arquivos
 
-def main_empresas():
+def main_info_empresas():
     link = 'https://srinfo.embrapii.org.br/company/list/'
-    nome_arquivo = 'empresas'
+    nome_arquivo = 'info_empresas'
     baixar_e_juntar_arquivos(link, current_dir, nome_arquivo)
 
 
 if __name__ == "__main__":
-    main_empresas()
+    main_info_empresas()

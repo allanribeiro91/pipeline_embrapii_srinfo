@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 USERNAME = os.getenv('sharepoint_email')
-PASSWORD = os.getenv('PASSWORD')
+PASSWORD = os.getenv('sharepoint_password')
 SHAREPOINT_SITE = os.getenv('sharepoint_url_site')
 SHAREPOINT_SITE_NAME = os.getenv('sharepoint_site_name')
 SHAREPOINT_DOC = os.getenv('sharepoint_doc_library')

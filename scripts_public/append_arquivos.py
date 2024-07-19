@@ -28,14 +28,12 @@ def append_excel_files(diretorio, nome_arquivo):
         os.makedirs(data_temp_folder)
 
     all_files = [os.path.join(input_folder, f) for f in os.listdir(input_folder) if f.endswith('.xlsx')]
-    print('N files: ', all_files)
     if len(all_files) == 1:
         # Caso tenha apenas um arquivo, copie, renomeie e mova para a pasta de destino
         file = all_files[0]
         unprotected_file = remove_protection(file, data_temp_folder)
         novo_caminho = os.path.join(output_folder, novo_nome)
         shutil.copy2(unprotected_file, novo_caminho)  # Faz a cópia e renomeia o arquivo
-        print(f'Arquivo único {unprotected_file} copiado e renomeado para {novo_caminho}')
     else:
         # Caso tenha mais de um arquivo, concatene-os
         data_frames = []
@@ -51,7 +49,6 @@ def append_excel_files(diretorio, nome_arquivo):
 
         output_file = os.path.join(output_folder, novo_nome)
         final_df.to_excel(output_file, index=False)
-        print(f'Arquivos concatenados e salvos em {output_file}')
 
     # Apaga a pasta data_temp e todo o seu conteúdo
     shutil.rmtree(data_temp_folder)

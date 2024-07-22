@@ -6,7 +6,16 @@ PIPELINE DE DADOS SRINFO:
 ✔ 3. Juntar os arquivos da pasta data_raw em um apenas e mover para stage_area @done(24-07-18 13:53)
     - Função: append_arquivos
 ☐ 4. Transformar os dados nas tabelas desejadas
+    ✔ 4.1. Criar a tabela classificacao_projeto @done(24-07-22 11:48)
+    ☐ 4.2. Criar a tabela portfolio
 ☐ 5. Mover para o Sharepoint
-☐ 6. Criar a planilha de logs
+    ✔ 5.1. Criar o script para mover para o sharepoint @done(24-07-22 09:52)
+    ✔ 5.2. Criar o DWPII no Sharepoint @done(24-07-22 09:52)
+    ☐ 5.3. Automatizar o envio dos arquivos para o sharepoint
+☐ 6. Logear as ações
+    ☐ 6.1. Criar a planilha de logs
+    ☐ 6.2. Criar scripts para logear as ações
 ☐ 7. Deixar a rotina automatizada
-
+☐ 8. Documentar o pipeline
+    ☐ 8.1. Criar planilha de documentação das tabelas
+    ☐ 8.2. Criar documento de especificação do pipeline

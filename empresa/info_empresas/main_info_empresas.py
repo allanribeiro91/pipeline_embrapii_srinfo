@@ -3,7 +3,7 @@ import sys
 
 #sys.path
 current_dir = os.path.dirname(os.path.abspath(__file__))
-scripts_public_path = os.path.abspath(os.path.join(current_dir, '..', '..', 'etl_srinfo\\scripts_public'))
+scripts_public_path = os.path.abspath(os.path.join(current_dir, '..', '..', '..', 'etl_srinfo\scripts_public'))
 sys.path.append(scripts_public_path)
 
 from scripts_public import baixar_e_juntar_arquivos

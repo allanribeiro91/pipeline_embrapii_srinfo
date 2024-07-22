@@ -7,21 +7,19 @@ def copiar_e_renomear_arquivos():
     base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 
     origens = {
-        'empresas': os.path.join(base_dir, 'empresa', 'info_empresas', 'step_2_stage_area', 'info_empresas.xlsx'),
-        'projetos': os.path.join(base_dir, 'projeto', 'projetos', 'step_2_stage_area', 'projetos.xlsx'),
-        'unidades_embrapiis': os.path.join(base_dir, 'unidade_embrapii', 'info_unidades', 'step_2_stage_area', 'info_unidades_embrapii.xlsx'),
-        'classificacao_projeto': os.path.join(base_dir, 'DWPII_copy', 'classificacao_projeto.xlsx')
+        'contratos': os.path.join(base_dir, 'projeto', 'contratos', 'step_3_data_processed', 'contratos.xlsx'),
+        'projetos': os.path.join(base_dir, 'projeto', 'projetos', 'step_3_data_processed', 'projetos.xlsx'),
+        'classificacao_projeto': os.path.join(base_dir, 'projeto', 'classificacao_projeto', 'step_3_data_processed', 'classificacao_projeto.xlsx')
     }
 
     # Define o caminho relativo da pasta de destino
-    destino = os.path.join(base_dir, 'projeto', 'classificacao_projeto', 'step_1_data_raw')
+    destino = os.path.join(base_dir, 'projeto', 'portfolio', 'step_1_data_raw')
 
     # Renomeia os arquivos ao copiar
     renomeios = {
-        'empresas': 'raw_empresas.xlsx',
+        'contratos': 'raw_contratos.xlsx',
         'projetos': 'raw_projetos.xlsx',
-        'unidades_embrapiis': 'raw_unidades_embrapiis.xlsx',
-        'classificacao_projeto': 'atual_classificacao_projeto.xlsx'
+        'classificacao_projeto': 'raw_classificacao_projeto.xlsx'
     }
 
     for chave, caminho_origem in origens.items():

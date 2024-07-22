@@ -1,6 +1,6 @@
-from projeto.classificacao_projeto.scripts.copiar_e_renomear_arquivos import copiar_e_renomear_arquivos
-from projeto.classificacao_projeto.scripts.new_classificacao_projeto import new_classificacao_projeto
-from projeto.classificacao_projeto.scripts.atualizacao_classificacao_projeto import atualizacao_classificao_projeto
+from scripts.copiar_e_renomear_arquivos import copiar_e_renomear_arquivos
+from scripts.new_classificacao_projeto import new_classificacao_projeto
+from scripts.atualizacao_classificacao_projeto import atualizacao_classificao_projeto
 
 def main_classificacao_projeto():
     copiar_e_renomear_arquivos()

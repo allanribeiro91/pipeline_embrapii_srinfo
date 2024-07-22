@@ -18,10 +18,22 @@ def append_excel_files(diretorio, nome_arquivo):
 
     # Obtém a data atual no formato aaaa.mm.dd
     data_atual = datetime.now().strftime('%Y.%m.%d')
-    novo_nome = f"{nome_arquivo}_{data_atual}.xlsx"
+    novo_nome = f"{nome_arquivo}.xlsx"
 
     input_folder = os.path.join(diretorio, 'step_1_data_raw')
     output_folder = os.path.join(diretorio, 'step_2_stage_area')
+
+    #apagar os arquivos da output_folder
+    for file in os.listdir(output_folder):
+        file_path = os.path.join(output_folder, file)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            print(f'Falha ao deletar {file_path}. Razão: {e}')
+
 
     data_temp_folder = os.path.join(input_folder, 'data_temp')
     if not os.path.exists(data_temp_folder):

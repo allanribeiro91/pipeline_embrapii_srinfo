@@ -1,3 +1,5 @@
+from scripts.tratamento_dados import processar_dados
+from scripts.criar_tabela_ue_linhas_atuacao import criar_tabela_ue_linhas_atuacao
 import os
 import sys
 
@@ -10,8 +12,10 @@ from scripts_public import baixar_e_juntar_arquivos
 
 def main_info_unidades():
     link = 'https://srinfo.embrapii.org.br/units/list/'
-    nome_arquivo = 'info_unidades'
+    nome_arquivo = 'info_unidades_embrapii'
     baixar_e_juntar_arquivos(link, current_dir, nome_arquivo)
+    processar_dados()
+    criar_tabela_ue_linhas_atuacao()
 
 
 if __name__ == "__main__":

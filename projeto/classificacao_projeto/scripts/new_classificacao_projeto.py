@@ -15,10 +15,22 @@ def new_classificacao_projeto():
     df_unidades_embrapii = pd.read_excel(caminho_unidades_embrapii)
 
     # Selecionar as colunas desejadas
-    colunas_projetos = ["Código EMBRAPII", "Unidade EMBRAPII", "Empresas", "Parceria / Programa", "Tipo de projeto", "Título", "Título público", "Objetivo", "Descrição pública"]
+    colunas_projetos = [
+        "Código EMBRAPII", 
+        "Unidade EMBRAPII", 
+        "Empresas", "Parceria / Programa", 
+        "Tipo de projeto", 
+        "Título", 
+        "Título público", 
+        "Objetivo", 
+        "Descrição pública"]
     df_projetos_selecionado = df_projetos[colunas_projetos]
 
-    colunas_unidades_embrapii = ["Unidade EMBRAPII", "Tipo de Instituição", "Competências Técnicas", "Linhas de Atuação"]
+    colunas_unidades_embrapii = [
+        "Unidade EMBRAPII", 
+        "Tipo de Instituição", 
+        "Competências Técnicas", 
+        "Linhas de Atuação"]
     df_unidades_embrapii_selecionado = df_unidades_embrapii[colunas_unidades_embrapii]
 
     # Mesclar os dados com base na chave "Unidade EMBRAPII"

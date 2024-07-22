@@ -10,7 +10,7 @@ def atualizacao_classificao_projeto():
     caminho_destino = os.path.join(base_dir, 'projeto', 'classificacao_projeto', 'step_3_data_processed', 'classificacao_projeto.xlsx')
 
     # Ler as planilhas
-    df_atual = pd.read_excel(caminho_atual, sheet_name='Planilha1')
+    df_atual = pd.read_excel(caminho_atual, sheet_name='Sheet1')
     df_new = pd.read_excel(caminho_new)
 
     # Identificar novos registros
@@ -22,7 +22,7 @@ def atualizacao_classificao_projeto():
 
     # Carregar a planilha atual com openpyxl
     wb = openpyxl.load_workbook(caminho_atual)
-    ws = wb['Planilha1']
+    ws = wb['Sheet1']
 
     # Adicionar novos registros ao final da planilha atual
     for _, row in novos_registros.iterrows():

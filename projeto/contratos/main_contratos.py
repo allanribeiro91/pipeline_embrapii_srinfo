@@ -17,7 +17,7 @@ def main_contratos():
     nome_arquivo = 'contratos'
     baixar_e_juntar_arquivos(link, current_dir, nome_arquivo)
     processar_dados()
-    print('main_contratos finalizado!')
+    print('main_contratos finalizado!!')
 
 
 if __name__ == "__main__":

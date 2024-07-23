@@ -1,7 +1,7 @@
 import os
 import sys
 from dotenv import load_dotenv
-import datetime
+from datetime import datetime
 
 #Adicionar o caminho do diretório raiz ao sys.path
 load_dotenv()

@@ -15,23 +15,23 @@ from office365_api.office365_api import SharePoint
 
 def save_file(file_n, file_obj, dest):
     file_dir_path = PurePath(dest, file_n)
-    print(f'Debug: Salvando arquivo -> {file_dir_path}')
+    # print(f'Debug: Salvando arquivo -> {file_dir_path}')
     with open(file_dir_path, 'wb') as f:
         f.write(file_obj)
 
 def get_file(file_n, folder, dest):
-    print(f'Debug: Baixando arquivo -> {file_n} da pasta -> {folder}')
+    # print(f'Debug: Baixando arquivo -> {file_n} da pasta -> {folder}')
     file_obj = SharePoint().download_file(file_n, folder)
     save_file(file_n, file_obj, dest)
 
 def get_files(folder, dest):
-    print(f'Debug: Listando arquivos na pasta -> {folder}')
+    # print(f'Debug: Listando arquivos na pasta -> {folder}')
     files_list = SharePoint()._get_files_list(folder)
     for file in files_list:
         get_file(file.name, folder, dest)
 
 def get_files_by_pattern(keyword, folder, dest):
-    print(f'Debug: Listando arquivos na pasta -> {folder} com padrão -> {keyword}')
+    # print(f'Debug: Listando arquivos na pasta -> {folder} com padrão -> {keyword}')
     files_list = SharePoint()._get_files_list(folder)
     for file in files_list:
         if re.search(keyword, file.name):

@@ -14,6 +14,5 @@ def baixar_e_juntar_arquivos(link, diretorio, nome_arquivo):
     numero_arquivos = baixar_dados_srinfo(link)
     mover_arquivos_excel(numero_arquivos, pasta_download, diretorio, nome_arquivo)
     append_excel_files(diretorio, nome_arquivo)
-    print('Baixar e juntar arquivos: Finalizado!')
 
 

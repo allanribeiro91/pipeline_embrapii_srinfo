@@ -25,6 +25,7 @@ PIPELINE DE DADOS SRINFO:
     ✔ 6.1. Criar o script para mover para o sharepoint @done(24-07-22 09:52)
     ✔ 6.2. Criar o DWPII no Sharepoint @done(24-07-22 09:52)
     ☐ 6.3. Automatizar o envio dos arquivos para o sharepoint
+    ☐ 6.4. Limpar DWPII_copy e DWPII_up ao iniciar o pipeline
 ☐ 7. Logear as ações
     ☐ 7.1. Criar a planilha de logs
     ☐ 7.2. Criar scripts para logear as ações

@@ -42,7 +42,7 @@ class SharePoint:
     def download_file(self, file_name, folder_name):
         conn = self._auth()
         file_url = f'/sites/{SHAREPOINT_SITE_NAME}/{SHAREPOINT_DOC}/{folder_name}/{file_name}'
-        print(f'Debug: URL do arquivo -> {file_url}')
+        # print(f'Debug: URL do arquivo -> {file_url}')
         file = File.open_binary(conn, file_url)
         return file.content
 
@@ -104,6 +104,6 @@ class SharePoint:
 # Testando a listagem de arquivos na biblioteca de documentos 'General'
 if __name__ == '__main__':
     sharepoint = SharePoint()
-    files = sharepoint.get_file_properties_from_folder('DWPII')
-    for file in files:
-        print(file)
+    # files = sharepoint.get_file_properties_from_folder('DWPII')
+    # for file in files:
+    #     print(file)

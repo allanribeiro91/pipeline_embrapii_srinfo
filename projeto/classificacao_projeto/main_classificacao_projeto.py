@@ -11,6 +11,7 @@ PATH_ROOT = os.path.abspath(os.path.join(ROOT))
 SCRIPTS_PUBLIC_PATH = os.path.abspath(os.path.join(ROOT, 'scripts_public'))
 CURRENT_DIR = os.path.abspath(os.path.join(ROOT, 'projeto', 'classificacao_projeto'))
 SCRIPTS_PATH = os.path.abspath(os.path.join(CURRENT_DIR, 'scripts'))
+DIRETORIO_ARQUIVOS_FINALIZADOS = os.path.abspath(os.path.join(CURRENT_DIR, 'step_3_data_processed'))
 
 #Adicionar caminhos ao sys.path
 sys.path.append(PATH_ROOT)
@@ -18,9 +19,10 @@ sys.path.append(SCRIPTS_PUBLIC_PATH)
 sys.path.append(SCRIPTS_PATH)
 
 #Importar módulos necessários
+from scripts_public.copiar_e_renomear_arquivos import copiar_e_renomear_arquivos
+from scripts_public.copiar_arquivos_finalizados_para_dwpii import copiar_arquivos_finalizados_para_dwpii
 from new_classificacao_projeto import new_classificacao_projeto
 from atualizacao_classificacao_projeto import atualizacao_classificao_projeto
-from scripts_public.copiar_e_renomear_arquivos import copiar_e_renomear_arquivos
 
 #definir variáveis de copiar_e_renomear_arquivos
 origens = {
@@ -46,7 +48,7 @@ def main_classificacao_projeto():
     copiar_e_renomear_arquivos(origens, destino, renomeios)
     new_classificacao_projeto()
     atualizacao_classificao_projeto()
-    print('Tabela classificacao_projeto criada com sucesso!')
+    copiar_arquivos_finalizados_para_dwpii(DIRETORIO_ARQUIVOS_FINALIZADOS)
 
 if __name__ == "__main__":
     main_classificacao_projeto()

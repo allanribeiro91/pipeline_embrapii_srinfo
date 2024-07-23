@@ -1,19 +1,31 @@
-from scripts.tratamento_dados import processar_dados
-from scripts.criar_tabela_ue_linhas_atuacao import criar_tabela_ue_linhas_atuacao
 import os
 import sys
+from dotenv import load_dotenv
 
-#sys.path
-current_dir = os.path.dirname(os.path.abspath(__file__))
-scripts_public_path = os.path.abspath(os.path.join(current_dir, '..', '..', '..', 'etl_srinfo\scripts_public'))
-sys.path.append(scripts_public_path)
+#carregar .env
+load_dotenv()
+ROOT = os.getenv('ROOT')
 
-from scripts_public import baixar_e_juntar_arquivos
+#Definição dos caminhos
+PATH_ROOT = os.path.abspath(os.path.join(ROOT))
+SCRIPTS_PUBLIC_PATH = os.path.abspath(os.path.join(ROOT, 'scripts_public'))
+CURRENT_DIR = os.path.abspath(os.path.join(ROOT, 'unidade_embrapii', 'info_unidades'))
+SCRIPTS_PATH = os.path.abspath(os.path.join(CURRENT_DIR, 'scripts'))
+
+#Adicionar caminhos ao sys.path
+sys.path.append(PATH_ROOT)
+sys.path.append(SCRIPTS_PUBLIC_PATH)
+sys.path.append(SCRIPTS_PATH)
+
+#Importar módulos necessários
+from scripts_public.scripts_public import baixar_e_juntar_arquivos
+from tratamento_dados import processar_dados
+from criar_tabela_ue_linhas_atuacao import criar_tabela_ue_linhas_atuacao
 
 def main_info_unidades():
     link = 'https://srinfo.embrapii.org.br/units/list/'
     nome_arquivo = 'info_unidades_embrapii'
-    baixar_e_juntar_arquivos(link, current_dir, nome_arquivo)
+    baixar_e_juntar_arquivos(link, CURRENT_DIR, nome_arquivo)
     processar_dados()
     criar_tabela_ue_linhas_atuacao()
 

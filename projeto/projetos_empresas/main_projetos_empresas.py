@@ -27,7 +27,7 @@ origens = {
     }
 
 # Define o caminho relativo da pasta de destino
-destino = os.path.join(ROOT, 'projeto', 'projetos_empresas', 'step_1_data_raw')
+destino = os.path.join(CURRENT_DIR, 'step_1_data_raw')
 
 # Renomeia os arquivos ao copiar
 renomeios = {

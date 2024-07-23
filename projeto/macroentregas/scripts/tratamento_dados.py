@@ -1,17 +1,20 @@
 import os
 import sys
+from dotenv import load_dotenv
 
-# sys.path
-current_dir = os.path.dirname(os.path.abspath(__file__))
-scripts_public_path = os.path.abspath(os.path.join(current_dir, '..', '..', '..', '..', 'etl_srinfo', 'scripts_public'))
-sys.path.append(scripts_public_path)
+#carregar .env
+load_dotenv()
+ROOT = os.getenv('ROOT')
+
+#sys.path
+SCRIPTS_PUBLIC_PATH = os.path.abspath(os.path.join(ROOT, 'scripts_public'))
+sys.path.append(SCRIPTS_PUBLIC_PATH)
 
 from processar_excel import processar_excel
 
 # Definições dos caminhos e nomes de arquivos
-base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
-origem = os.path.join(base_dir, 'projeto', 'macroentregas', 'step_2_stage_area')
-destino = os.path.join(base_dir, 'projeto', 'macroentregas', 'step_3_data_processed')
+origem = os.path.join(ROOT, 'projeto', 'macroentregas', 'step_2_stage_area')
+destino = os.path.join(ROOT, 'projeto', 'macroentregas', 'step_3_data_processed')
 nome_arquivo = "macroentregas.xlsx"
 arquivo_origem = os.path.join(origem, nome_arquivo)
 arquivo_destino = os.path.join(destino, nome_arquivo)

@@ -13,5 +13,3 @@ def copiar_e_renomear_arquivos(origens, destino, renomeios):
         
         # Copia e renomeia o arquivo
         shutil.copy2(caminho_origem, arquivo_destino)
-        
-    print(f"Arquivos copiados com sucesso!")

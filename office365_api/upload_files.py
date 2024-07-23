@@ -1,22 +1,24 @@
-from office365_api import SharePoint
 import re
 import sys, os
 from pathlib import PurePath
+from dotenv import load_dotenv
 
-# 1 args = Root Directory Path of files to upload
-ROOT_DIR = sys.argv[1]
-# 2 args = SharePoint folder name. May include subfolders to upload to
-SHAREPOINT_FOLDER_NAME = sys.argv[2]
-# 3 args = File name pattern. Only upload files with this pattern
-FILE_NAME_PATTERN = sys.argv[3]
+#Adicionar o caminho do diretório raiz ao sys.path
+load_dotenv()
+ROOT = os.getenv('ROOT')
+PATH_OFFICE = os.path.abspath(os.path.join(ROOT, 'office365_api'))
 
+# Adiciona o diretório correto ao sys.path
+sys.path.append(PATH_OFFICE)
 
-def upload_files(folder, keyword=None):
-    file_list = get_list_of_files(folder)
+from office365_api.office365_api import SharePoint
+
+def upload_files(pasta_arquivos, destino, keyword=None):
+    file_list = get_list_of_files(pasta_arquivos)
     for file in file_list:
         if keyword is None or keyword == 'None' or re.search(keyword, file[0]):
             file_content = get_file_content(file[1])
-            SharePoint().upload_file(file[0], SHAREPOINT_FOLDER_NAME, file_content)
+            SharePoint().upload_file(file[0], destino, file_content)
 
 def get_list_of_files(folder):
     file_list = []
@@ -31,6 +33,3 @@ def get_list_of_files(folder):
 def get_file_content(file_path):
     with open(file_path, 'rb') as f:
         return f.read()
-
-if __name__ == '__main__':
-    upload_files(ROOT_DIR, FILE_NAME_PATTERN)

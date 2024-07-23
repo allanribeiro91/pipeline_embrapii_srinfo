@@ -1,14 +1,18 @@
 import pandas as pd
 import os
+import sys
+from dotenv import load_dotenv
 
+#carregar .env
+load_dotenv()
+ROOT = os.getenv('ROOT')
 
 def new_classificacao_projeto():
 
     # Define os caminhos das planilhas
-    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
-    caminho_projetos = os.path.join(base_dir, 'projeto', 'classificacao_projeto', 'step_1_data_raw', 'raw_projetos.xlsx')
-    caminho_unidades_embrapii = os.path.join(base_dir, 'projeto', 'classificacao_projeto', 'step_1_data_raw', 'raw_unidades_embrapiis.xlsx')
-    caminho_destino = os.path.join(base_dir, 'projeto', 'classificacao_projeto', 'step_2_stage_area', 'new_classificacao_projeto.xlsx')
+    caminho_projetos = os.path.join(ROOT, 'projeto', 'classificacao_projeto', 'step_1_data_raw', 'raw_projetos.xlsx')
+    caminho_unidades_embrapii = os.path.join(ROOT, 'projeto', 'classificacao_projeto', 'step_1_data_raw', 'raw_unidades_embrapiis.xlsx')
+    caminho_destino = os.path.join(ROOT, 'projeto', 'classificacao_projeto', 'step_2_stage_area', 'new_classificacao_projeto.xlsx')
 
     # Ler as planilhas
     df_projetos = pd.read_excel(caminho_projetos)
@@ -82,3 +86,7 @@ def new_classificacao_projeto():
     df_final.to_excel(caminho_destino, index=False)
 
     print(f"Planilha salva em {caminho_destino}")
+
+#Executar função
+if __name__ == "__main__":
+    new_classificacao_projeto()

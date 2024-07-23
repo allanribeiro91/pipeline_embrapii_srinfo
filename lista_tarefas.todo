@@ -15,7 +15,8 @@ PIPELINE DE DADOS SRINFO:
     ✔ 4.7. Tabela ue_linhas_atuacao @done(24-07-23 10:07)
     ✔ 4.8. Tabela info_empresas @done(24-07-23 10:07)
     ✘ 4.9. Tabela empresas_cnaes_secundarios @cancelled(24-07-23 10:36)
-    ☐ 4.10. Tabela projetos_empresas
+    ✔ 4.10. Tabela projetos_empresas @done(24-07-23 14:20)
+    ☐ 4.11. Tabela info_empresas
 ☐ 5. Transformar os dados nas tabelas desejadas
     ✔ 5.1. Criar a tabela classificacao_projeto @done(24-07-22 11:48)
     ✔ 5.2. Criar a tabela portfolio @done(24-07-23 09:59)

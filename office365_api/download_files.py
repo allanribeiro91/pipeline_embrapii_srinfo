@@ -1,7 +1,17 @@
-from office365_api import SharePoint
 import re
 import sys, os
 from pathlib import PurePath
+from dotenv import load_dotenv
+
+#Adicionar o caminho do diretório raiz ao sys.path
+load_dotenv()
+ROOT = os.getenv('ROOT')
+PATH_OFFICE = os.path.abspath(os.path.join(ROOT, 'office365_api'))
+
+# Adiciona o diretório correto ao sys.path
+sys.path.append(PATH_OFFICE)
+
+from office365_api.office365_api import SharePoint
 
 def save_file(file_n, file_obj, dest):
     file_dir_path = PurePath(dest, file_n)

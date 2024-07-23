@@ -1,13 +1,17 @@
 import os
 import pandas as pd
+from dotenv import load_dotenv
+
+#carregar .env
+load_dotenv()
+ROOT = os.getenv('ROOT')
 
 def criar_tabela_ue_linhas_atuacao():
     # Caminho do arquivo Excel
-    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
-    origem = os.path.join(base_dir, 'unidade_embrapii', 'info_unidades', 'step_2_stage_area')
+    origem = os.path.join(ROOT, 'unidade_embrapii', 'info_unidades', 'step_2_stage_area')
     nome_arquivo = 'info_unidades_embrapii.xlsx'
     arquivo_origem = os.path.join(origem, nome_arquivo)
-    destino = os.path.join(base_dir, 'unidade_embrapii', 'info_unidades', 'step_3_data_processed')
+    destino = os.path.join(ROOT, 'unidade_embrapii', 'info_unidades', 'step_3_data_processed')
     arquivo_destino = os.path.join(destino, 'ue_linhas_atuacao.xlsx')
 
     # Ler o arquivo Excel

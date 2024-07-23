@@ -8,9 +8,9 @@ PIPELINE DE DADOS SRINFO:
 ☐ 4. Normalizar as tabelas
     ✔ 4.1. Tabela contratos @done(24-07-23 10:07)
     ✔ 4.2. Tabela projetos @done(24-07-23 10:07)
-    ☐ 4.3. Tabela macroentregas
-    ☐ 4.4. Tabela estudantes
-    ☐ 4.5. Tabela pedidos_pi
+    ✔ 4.3. Tabela macroentregas @done(24-07-23 11:12)
+    ✔ 4.4. Tabela estudantes @done(24-07-23 11:54)
+    ✔ 4.5. Tabela pedidos_pi @done(24-07-23 11:30)
     ✔ 4.6. Tabela info_unidades_embrapii @done(24-07-23 10:07)
     ✔ 4.7. Tabela ue_linhas_atuacao @done(24-07-23 10:07)
     ✔ 4.8. Tabela info_empresas @done(24-07-23 10:07)

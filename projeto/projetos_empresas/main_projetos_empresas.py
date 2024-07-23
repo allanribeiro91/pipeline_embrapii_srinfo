@@ -11,6 +11,7 @@ PATH_ROOT = os.path.abspath(os.path.join(ROOT))
 SCRIPTS_PUBLIC_PATH = os.path.abspath(os.path.join(ROOT, 'scripts_public'))
 CURRENT_DIR = os.path.abspath(os.path.join(ROOT, 'projeto', 'projetos_empresas'))
 SCRIPTS_PATH = os.path.abspath(os.path.join(CURRENT_DIR, 'scripts'))
+DIRETORIO_ARQUIVOS_FINALIZADOS = os.path.abspath(os.path.join(CURRENT_DIR, 'step_3_data_processed'))
 
 #Adicionar caminhos ao sys.path
 sys.path.append(PATH_ROOT)
@@ -19,6 +20,7 @@ sys.path.append(SCRIPTS_PATH)
 
 #Importar módulos necessários
 from scripts_public.copiar_e_renomear_arquivos import copiar_e_renomear_arquivos
+from scripts_public.copiar_arquivos_finalizados_para_dwpii import copiar_arquivos_finalizados_para_dwpii
 from criar_tabela_projetos_empresas import criar_tabela_projetos_empresas 
 
 #definir variáveis de copiar_e_renomear_arquivos
@@ -38,7 +40,7 @@ renomeios = {
 def main_projetos_empresas():
     copiar_e_renomear_arquivos(origens, destino, renomeios)
     criar_tabela_projetos_empresas()
-    print('Tabela projetos_empresas criada com sucesso!')
+    copiar_arquivos_finalizados_para_dwpii(DIRETORIO_ARQUIVOS_FINALIZADOS)
 
 if __name__ == "__main__":
     main_projetos_empresas()

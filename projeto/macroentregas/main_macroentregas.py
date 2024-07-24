@@ -33,9 +33,6 @@ def main_macroentregas(driver):
     copiar_arquivos_finalizados_para_dwpii(DIRETORIO_ARQUIVOS_FINALIZADOS)
 
 
-
-
-
 # Definições dos caminhos e nomes de arquivos
 origem = os.path.join(ROOT, 'projeto', 'macroentregas', 'step_2_stage_area')
 destino = os.path.join(ROOT, 'projeto', 'macroentregas', 'step_3_data_processed')

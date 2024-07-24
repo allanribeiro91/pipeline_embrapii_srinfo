@@ -60,9 +60,7 @@ def main_pipeline_srinfo():
     current_datetime = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
     log.append([current_datetime, USUARIO, 'projetos_contratados'])
     main_projetos_empresas()
-    driver.delete_all_cookies()
-    gc.collect()
-
+    
     main_contratos(driver)
     current_datetime = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
     log.append([current_datetime, USUARIO, 'contratos'])

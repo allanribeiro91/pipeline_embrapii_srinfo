@@ -106,7 +106,6 @@ def criar_tabela_portfolio():
         "nota_avaliacao",
         "observacoes",
         "tags",
-        "status",
         "data_extracao_dados",
     ]
     df_portfolio = df_portfolio[colunas_finais]

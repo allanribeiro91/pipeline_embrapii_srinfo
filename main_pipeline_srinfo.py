@@ -1,5 +1,6 @@
 import os
 import sys
+import gc
 from dotenv import load_dotenv
 from datetime import datetime
 
@@ -32,11 +33,11 @@ def main_pipeline_srinfo():
 
     #configurar o webdriver
     driver = configurar_webdriver()
-    
+
     #empresas
     main_info_empresas(driver)
     
-    # #unidades embrapii
+    #unidades embrapii
     main_info_unidades(driver)
 
     #projetos
@@ -48,7 +49,6 @@ def main_pipeline_srinfo():
     main_macroentregas(driver)
     main_classificacao_projeto()
     main_portfolio()
-
 
     driver.quit()
 

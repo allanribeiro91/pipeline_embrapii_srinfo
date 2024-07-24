@@ -16,12 +16,12 @@ DIRETORIO_ARQUIVOS_FINALIZADOS = os.path.abspath(os.path.join(CURRENT_DIR, 'step
 #Adicionar caminhos ao sys.path
 sys.path.append(PATH_ROOT)
 sys.path.append(SCRIPTS_PUBLIC_PATH)
-sys.path.append(SCRIPTS_PATH)
+sys.path.append(CURRENT_DIR)
 
 #Importar módulos necessários
 from scripts_public.scripts_public import baixar_e_juntar_arquivos
 from scripts_public.copiar_arquivos_finalizados_para_dwpii import copiar_arquivos_finalizados_para_dwpii
-from tratamento_dados import processar_dados
+from scripts.tratamento_dados import processar_dados
 
 #Definição da função
 def main_estudantes(driver):

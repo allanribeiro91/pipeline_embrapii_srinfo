@@ -29,31 +29,31 @@ def main_pipeline_srinfo():
     print('Início: ', datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
 
     #sharepoint
-    # buscar_arquivos_sharepoint()
+    buscar_arquivos_sharepoint()
 
     #configurar o webdriver
     driver = configurar_webdriver()
 
     #empresas
-    # main_info_empresas(driver)
+    main_info_empresas(driver)
     
     #unidades embrapii
-    # main_info_unidades(driver)
+    main_info_unidades(driver)
 
     #projetos
-    # main_contratos(driver)
-    # main_projetos(driver)
-    # main_projetos_empresas()
+    main_contratos(driver)
+    main_projetos(driver)
+    main_projetos_empresas()
     main_estudantes(driver)
-    # main_pedidos_pi(driver)
-    # main_macroentregas(driver)
-    # main_classificacao_projeto()
-    # main_portfolio()
+    main_pedidos_pi(driver)
+    main_macroentregas(driver)
+    main_classificacao_projeto()
+    main_portfolio()
 
     driver.quit()
 
     #sharepoint
-    # levar_arquivos_sharepoint()
+    levar_arquivos_sharepoint()
 
     print('Fim: ', datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
     

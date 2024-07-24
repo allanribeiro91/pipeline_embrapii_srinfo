@@ -8,6 +8,7 @@ def criar_tabela_portfolio():
     raw_projetos_path = os.path.join(base_dir, 'projeto', 'portfolio', 'step_1_data_raw', 'raw_projetos.xlsx')
     raw_contratos_path = os.path.join(base_dir, 'projeto', 'portfolio', 'step_1_data_raw', 'raw_contratos.xlsx')
     raw_classificacao_projeto_path = os.path.join(base_dir, 'projeto', 'portfolio', 'step_1_data_raw', 'raw_classificacao_projeto.xlsx')
+    raw_relatorio_projetos_contratados_path = os.path.join(base_dir, 'analises_relatorios', 'projetos_contratados', 'step_1_data_raw', 'raw_relatorio_projetos_contratados.xlsx')
     destino = os.path.join(base_dir, 'projeto', 'portfolio', 'step_3_data_processed')
     arquivo_destino = os.path.join(destino, 'portfolio.xlsx')
 
@@ -15,6 +16,7 @@ def criar_tabela_portfolio():
     df_projetos = pd.read_excel(raw_projetos_path)
     df_contratos = pd.read_excel(raw_contratos_path)
     df_classificacao_projeto = pd.read_excel(raw_classificacao_projeto_path)
+    df_projetos_contratados = pd.read_excel(raw_relatorio_projetos_contratados_path)
 
     # Selecionar apenas as colunas de interesse
     colunas_contratos = [
@@ -59,9 +61,17 @@ def criar_tabela_portfolio():
     ]
     df_classificacao_projeto_selecionado = df_classificacao_projeto[colunas_classificacao_projeto]
 
+    colunas_projetos_contratados = [
+        "Código",
+        "Status",
+    ]
+    df_projetos_contratados_selecionados = df_projetos_contratados[colunas_projetos_contratados].rename(columns={'Código': 'codigo_projeto'})
+
+
     # Mesclar os dados com base na chave "codigo_projeto"
     df_portfolio = df_contratos_selecionado.merge(df_projetos_selecionado, on='codigo_projeto', how='left')
     df_portfolio = df_portfolio.merge(df_classificacao_projeto_selecionado, on='codigo_projeto', how='left')
+    # df_portfolio = df_portfolio.merge(df_projetos_contratados_selecionados, on='codigo_projeto', how='left')
 
     # Adicionar a coluna "data_extracao_dados" com a data de hoje
     df_portfolio['data_extracao_dados'] = datetime.now().strftime('%d/%m/%Y')
@@ -96,6 +106,7 @@ def criar_tabela_portfolio():
         "nota_avaliacao",
         "observacoes",
         "tags",
+        "status",
         "data_extracao_dados",
     ]
     df_portfolio = df_portfolio[colunas_finais]

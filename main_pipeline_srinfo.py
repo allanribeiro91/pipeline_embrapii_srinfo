@@ -38,37 +38,19 @@ def main_pipeline_srinfo():
 
     #empresas
     main_info_empresas(driver)
-    driver.delete_all_cookies()
-    gc.collect()
-    
+
     #unidades embrapii
     main_info_unidades(driver)
-    driver.delete_all_cookies()
-    gc.collect()
 
     # #projetos
     main_projetos_contratados(driver)
     main_projetos_empresas()
-    driver.delete_all_cookies()
-    gc.collect()
-
     main_contratos(driver)
-    driver.delete_all_cookies()
-    gc.collect()
-
     main_projetos(driver)
-    driver.delete_all_cookies()
-    gc.collect()
-    
     main_estudantes(driver)
-    driver.delete_all_cookies()
-    gc.collect()
-    
     main_pedidos_pi(driver)
-    driver.delete_all_cookies()
-    gc.collect()
-
     main_macroentregas(driver)
+
     encerrar_webdriver(driver)
 
     main_classificacao_projeto()

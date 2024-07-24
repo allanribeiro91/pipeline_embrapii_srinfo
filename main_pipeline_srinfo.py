@@ -56,7 +56,6 @@ def main_pipeline_srinfo():
     main_classificacao_projeto()
     main_portfolio()
 
-
     #sharepoint
     levar_arquivos_sharepoint()
 

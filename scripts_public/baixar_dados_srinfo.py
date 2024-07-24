@@ -11,21 +11,21 @@ from selenium.webdriver.edge.service import Service as EdgeService
 # Carregar variáveis de ambiente do arquivo .env
 load_dotenv()
 
-def baixar_dados_srinfo(link_listagem):
+def baixar_dados_srinfo(driver, link_listagem):
 
     username = os.getenv('USERNAME')
     password = os.getenv('PASSWORD')
 
-    # Configurar o WebDriver usando webdriver-manager
-    edge_service = EdgeService(EdgeChromiumDriverManager().install())
-    options = webdriver.EdgeOptions()
-    options.add_argument('--disable-gpu')
-    options.add_argument('--no-sandbox')
-    options.add_argument('start-maximized')
-    options.add_argument('disable-infobars')
-    options.add_argument('--disable-extensions')
+    # # Configurar o WebDriver usando webdriver-manager
+    # edge_service = EdgeService(EdgeChromiumDriverManager().install())
+    # options = webdriver.EdgeOptions()
+    # options.add_argument('--disable-gpu')
+    # options.add_argument('--no-sandbox')
+    # options.add_argument('start-maximized')
+    # options.add_argument('disable-infobars')
+    # options.add_argument('--disable-extensions')
 
-    driver = webdriver.Edge(service=edge_service, options=options)
+    # driver = webdriver.Edge(service=edge_service, options=options)
     
     try:
         #Acessar tela de login
@@ -87,7 +87,8 @@ def baixar_dados_srinfo(link_listagem):
                 carregar_dados_e_fazer_download(driver=driver)
                 numero_download += 1
     finally:
-        driver.quit()
+        # driver.quit()
+        pass
     
     return numero_download
 

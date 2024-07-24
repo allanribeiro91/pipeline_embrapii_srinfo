@@ -24,10 +24,10 @@ from scripts_public.copiar_arquivos_finalizados_para_dwpii import copiar_arquivo
 from tratamento_dados import processar_dados
 from criar_tabela_ue_linhas_atuacao import criar_tabela_ue_linhas_atuacao
 
-def main_info_unidades():
+def main_info_unidades(driver):
     link = 'https://srinfo.embrapii.org.br/units/list/'
     nome_arquivo = 'info_unidades_embrapii'
-    baixar_e_juntar_arquivos(link, CURRENT_DIR, nome_arquivo)
+    baixar_e_juntar_arquivos(driver, link, CURRENT_DIR, nome_arquivo)
     processar_dados()
     criar_tabela_ue_linhas_atuacao()
     copiar_arquivos_finalizados_para_dwpii(DIRETORIO_ARQUIVOS_FINALIZADOS)

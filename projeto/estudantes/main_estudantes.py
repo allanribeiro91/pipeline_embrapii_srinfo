@@ -24,13 +24,14 @@ from scripts_public.copiar_arquivos_finalizados_para_dwpii import copiar_arquivo
 from tratamento_dados import processar_dados
 
 #Definição da função
-def main_estudantes():
+def main_estudantes(driver):
     link = 'https://srinfo.embrapii.org.br/projects/student/list'
     nome_arquivo = 'estudantes'
-    baixar_e_juntar_arquivos(link, CURRENT_DIR, nome_arquivo)
+    baixar_e_juntar_arquivos(driver, link, CURRENT_DIR, nome_arquivo)
     processar_dados()
     copiar_arquivos_finalizados_para_dwpii(DIRETORIO_ARQUIVOS_FINALIZADOS)
 
 
+#Executar função
 if __name__ == "__main__":
     main_estudantes()

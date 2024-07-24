@@ -24,10 +24,10 @@ from scripts_public.copiar_arquivos_finalizados_para_dwpii import copiar_arquivo
 from tratamento_dados import processar_dados
 
 #Definição da função
-def main_pedidos_pi():
+def main_pedidos_pi(driver):
     link = 'https://srinfo.embrapii.org.br/projectmonitoring/ip/'
     nome_arquivo = 'pedidos_pi'
-    baixar_e_juntar_arquivos(link, CURRENT_DIR, nome_arquivo)
+    baixar_e_juntar_arquivos(driver, link, CURRENT_DIR, nome_arquivo)
     processar_dados()
     copiar_arquivos_finalizados_para_dwpii(DIRETORIO_ARQUIVOS_FINALIZADOS)
 

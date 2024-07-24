@@ -23,10 +23,10 @@ from scripts_public.scripts_public import baixar_e_juntar_arquivos
 from scripts_public.copiar_arquivos_finalizados_para_dwpii import copiar_arquivos_finalizados_para_dwpii
 from tratamento_dados import processar_dados
 
-def main_info_empresas():
+def main_info_empresas(driver):
     link = 'https://srinfo.embrapii.org.br/company/list/'
     nome_arquivo = 'info_empresas'
-    baixar_e_juntar_arquivos(link, CURRENT_DIR, nome_arquivo)
+    baixar_e_juntar_arquivos(driver, link, CURRENT_DIR, nome_arquivo)
     processar_dados()
     copiar_arquivos_finalizados_para_dwpii(DIRETORIO_ARQUIVOS_FINALIZADOS)
 

@@ -10,6 +10,7 @@ sys.path.append(ROOT)
 
 #Importar o módulo principal de contratos
 from scripts_public.buscar_arquivos_sharepoint import buscar_arquivos_sharepoint
+from scripts_public.webdriver import configurar_webdriver
 from empresa.info_empresas.main_info_empresas import main_info_empresas
 from unidade_embrapii.info_unidades.main_info_unidades import main_info_unidades
 from projeto.contratos.main_contratos import main_contratos
@@ -29,21 +30,27 @@ def main_pipeline_srinfo():
     #sharepoint
     buscar_arquivos_sharepoint()
 
-    #empresas
-    main_info_empresas()
+    #configurar o webdriver
+    driver = configurar_webdriver()
     
-    #unidades embrapii
-    main_info_unidades()
+    #empresas
+    main_info_empresas(driver)
+    
+    # #unidades embrapii
+    main_info_unidades(driver)
 
     #projetos
-    main_contratos()
-    main_projetos()
+    main_contratos(driver)
+    main_projetos(driver)
     main_projetos_empresas()
-    main_estudantes()
-    main_pedidos_pi()
-    main_macroentregas()
+    main_estudantes(driver)
+    main_pedidos_pi(driver)
+    main_macroentregas(driver)
     main_classificacao_projeto()
     main_portfolio()
+
+
+    driver.quit()
 
     #sharepoint
     levar_arquivos_sharepoint()

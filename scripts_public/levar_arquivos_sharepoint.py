@@ -20,9 +20,9 @@ from zipar_arquivos import zipar_arquivos
 
 def levar_arquivos_sharepoint():
 
-    # zipar_arquivos(DWII_COPY, DWII_BACKUP)
+    zipar_arquivos(DWII_COPY, DWII_BACKUP)
     upload_files(DWII_BACKUP, "DWPII_backup")
-    # upload_files(PASTA_ARQUIVOS, "DWPII")
+    upload_files(PASTA_ARQUIVOS, "DWPII")
 
 #Executar função
 if __name__ == "__main__":

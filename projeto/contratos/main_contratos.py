@@ -21,7 +21,7 @@ sys.path.append(CURRENT_DIR)
 #Importar módulos necessários
 from scripts_public.scripts_public import baixar_e_juntar_arquivos
 from scripts_public.copiar_arquivos_finalizados_para_dwpii import copiar_arquivos_finalizados_para_dwpii
-from scripts.tratamento_dados import processar_dados
+from tratamento_dados import processar_dados
 
 #Definição da função
 def main_contratos(driver):

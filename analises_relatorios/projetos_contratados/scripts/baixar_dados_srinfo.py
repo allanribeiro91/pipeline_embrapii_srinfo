@@ -12,7 +12,7 @@ from selenium.webdriver.edge.service import Service as EdgeService
 load_dotenv()
 
 
-def baixar_dados_srinfo_projetos_contratados():
+def baixar_dados_srinfo_projetos_contratados(driver):
 
     link_listagem = "https://srinfo.embrapii.org.br/analytics/reports/"
 
@@ -20,15 +20,15 @@ def baixar_dados_srinfo_projetos_contratados():
     password = os.getenv('PASSWORD')
 
     # Configurar o WebDriver usando webdriver-manager
-    edge_service = EdgeService(EdgeChromiumDriverManager().install())
-    options = webdriver.EdgeOptions()
-    options.add_argument('--disable-gpu')
-    options.add_argument('--no-sandbox')
-    options.add_argument('start-maximized')
-    options.add_argument('disable-infobars')
-    options.add_argument('--disable-extensions')
+    # edge_service = EdgeService(EdgeChromiumDriverManager().install())
+    # options = webdriver.EdgeOptions()
+    # options.add_argument('--disable-gpu')
+    # options.add_argument('--no-sandbox')
+    # options.add_argument('start-maximized')
+    # options.add_argument('disable-infobars')
+    # options.add_argument('--disable-extensions')
 
-    driver = webdriver.Edge(service=edge_service, options=options)
+    # driver = webdriver.Edge(service=edge_service, options=options)
     
     try:
         #Acessar tela de login
@@ -78,8 +78,9 @@ def baixar_dados_srinfo_projetos_contratados():
 
         carregar_dados_e_fazer_download(driver=driver)
     finally:
-        driver.quit()
-        print('Dados baixados!')
+        # driver.quit()
+        # print('Dados baixados!')
+        pass
     
 def carregar_dados_e_fazer_download(driver):
     #Esperar até 90 segundos para carregar
@@ -95,6 +96,3 @@ def carregar_dados_e_fazer_download(driver):
     )
     excel_button.click()
     time.sleep(3)
-
-
-baixar_dados_srinfo_projetos_contratados()

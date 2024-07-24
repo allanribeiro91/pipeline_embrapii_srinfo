@@ -14,6 +14,7 @@ from scripts_public.buscar_arquivos_sharepoint import buscar_arquivos_sharepoint
 from scripts_public.webdriver import configurar_webdriver
 from empresa.info_empresas.main_info_empresas import main_info_empresas
 from unidade_embrapii.info_unidades.main_info_unidades import main_info_unidades
+from analises_relatorios.projetos_contratados.main_projetos_contratados import main_projetos_contratados
 from projeto.contratos.main_contratos import main_contratos
 from projeto.projetos.main_projetos import main_projetos
 from projeto.projetos_empresas.main_projetos_empresas import main_projetos_empresas
@@ -40,7 +41,8 @@ def main_pipeline_srinfo():
     #unidades embrapii
     main_info_unidades(driver)
 
-    #projetos
+    # #projetos
+    main_projetos_contratados(driver)
     main_contratos(driver)
     main_projetos(driver)
     main_projetos_empresas()

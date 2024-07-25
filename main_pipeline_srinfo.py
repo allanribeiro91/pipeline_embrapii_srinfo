@@ -8,6 +8,7 @@ from datetime import datetime
 #Adicionar o caminho do diretório raiz ao sys.path
 load_dotenv()
 ROOT = os.getenv('ROOT')
+USUARIO = os.getenv('USERNAME')
 sys.path.append(ROOT)
 
 #Importar o módulo principal de contratos
@@ -24,11 +25,14 @@ from projeto.pedidos_pi.main_pedidos_pi import main_pedidos_pi
 from projeto.macroentregas.main_macroentregas import main_macroentregas
 from projeto.classificacao_projeto.main_classificacao_projeto import main_classificacao_projeto
 from projeto.portfolio.main_portfolio import main_portfolio
+from scripts_public.registrar_log import registrar_log
 from scripts_public.levar_arquivos_sharepoint import levar_arquivos_sharepoint
 
 def main_pipeline_srinfo():
 
     print('Início: ', datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+
+    log = []
 
     #sharepoint
     buscar_arquivos_sharepoint()
@@ -38,23 +42,63 @@ def main_pipeline_srinfo():
 
     #empresas
     main_info_empresas(driver)
+    current_datetime = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+    log.append([current_datetime, USUARIO, 'info_empresas'])
+    driver.delete_all_cookies()
+    gc.collect()
+    
 
     #unidades embrapii
     main_info_unidades(driver)
+    current_datetime = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+    log.append([current_datetime, USUARIO, 'info_unidades'])
+    driver.delete_all_cookies()
+    gc.collect()
 
     # #projetos
     main_projetos_contratados(driver)
+    current_datetime = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+    log.append([current_datetime, USUARIO, 'projetos_contratados'])
     main_projetos_empresas()
+    
     main_contratos(driver)
-    main_projetos(driver)
-    main_estudantes(driver)
-    main_pedidos_pi(driver)
-    main_macroentregas(driver)
+    current_datetime = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+    log.append([current_datetime, USUARIO, 'contratos'])
+    driver.delete_all_cookies()
+    gc.collect()
 
+    main_projetos(driver)
+    current_datetime = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+    log.append([current_datetime, USUARIO, 'projetos'])
+    driver.delete_all_cookies()
+    gc.collect()
+    
+    main_estudantes(driver)
+    current_datetime = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+    log.append([current_datetime, USUARIO, 'estudantes'])
+    driver.delete_all_cookies()
+    gc.collect()
+    
+    main_pedidos_pi(driver)
+    current_datetime = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+    log.append([current_datetime, USUARIO, 'pedidos_pi'])
+    driver.delete_all_cookies()
+    gc.collect()
+
+    main_macroentregas(driver)
+    current_datetime = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+    log.append([current_datetime, USUARIO, 'macroentregas'])
     encerrar_webdriver(driver)
 
     main_classificacao_projeto()
+    current_datetime = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+    log.append([current_datetime, USUARIO, 'classificacao_projetos'])
+
     main_portfolio()
+    current_datetime = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+    log.append([current_datetime, USUARIO, 'portfolio'])
+
+    registrar_log(log)
 
     #sharepoint
     levar_arquivos_sharepoint()

@@ -8,7 +8,6 @@ def criar_tabela_portfolio():
     raw_projetos_path = os.path.join(base_dir, 'projeto', 'portfolio', 'step_1_data_raw', 'raw_projetos.xlsx')
     raw_contratos_path = os.path.join(base_dir, 'projeto', 'portfolio', 'step_1_data_raw', 'raw_contratos.xlsx')
     raw_classificacao_projeto_path = os.path.join(base_dir, 'projeto', 'portfolio', 'step_1_data_raw', 'raw_classificacao_projeto.xlsx')
-    raw_relatorio_projetos_contratados_path = os.path.join(base_dir, 'analises_relatorios', 'projetos_contratados', 'step_1_data_raw', 'raw_relatorio_projetos_contratados.xlsx')
     destino = os.path.join(base_dir, 'projeto', 'portfolio', 'step_3_data_processed')
     arquivo_destino = os.path.join(destino, 'portfolio.xlsx')
 
@@ -16,7 +15,6 @@ def criar_tabela_portfolio():
     df_projetos = pd.read_excel(raw_projetos_path)
     df_contratos = pd.read_excel(raw_contratos_path)
     df_classificacao_projeto = pd.read_excel(raw_classificacao_projeto_path)
-    df_projetos_contratados = pd.read_excel(raw_relatorio_projetos_contratados_path)
 
     # Selecionar apenas as colunas de interesse
     colunas_contratos = [
@@ -60,12 +58,6 @@ def criar_tabela_portfolio():
         "area_aplicacao",
     ]
     df_classificacao_projeto_selecionado = df_classificacao_projeto[colunas_classificacao_projeto]
-
-    colunas_projetos_contratados = [
-        "Código",
-        "Status",
-    ]
-    df_projetos_contratados_selecionados = df_projetos_contratados[colunas_projetos_contratados].rename(columns={'Código': 'codigo_projeto'})
 
 
     # Mesclar os dados com base na chave "codigo_projeto"

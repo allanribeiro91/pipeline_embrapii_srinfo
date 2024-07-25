@@ -5,13 +5,13 @@ import psutil
 from dotenv import load_dotenv
 from datetime import datetime
 
-#Adicionar o caminho do diretório raiz ao sys.path
+# Adicionar o caminho do diretório raiz ao sys.path
 load_dotenv()
 ROOT = os.getenv('ROOT')
 USUARIO = os.getenv('USERNAME')
 sys.path.append(ROOT)
 
-#Importar o módulo principal de contratos
+# Importar o módulo principal de contratos
 from scripts_public.buscar_arquivos_sharepoint import buscar_arquivos_sharepoint
 from scripts_public.webdriver import configurar_webdriver
 from empresa.info_empresas.main_info_empresas import main_info_empresas
@@ -34,77 +34,56 @@ def main_pipeline_srinfo():
 
     log = []
 
-    #sharepoint
+    # SharePoint
     buscar_arquivos_sharepoint()
 
-    #configurar o webdriver
+    # Configurar o WebDriver
     driver = configurar_webdriver()
 
-    #empresas
+    # Empresas
     main_info_empresas(driver)
-    current_datetime = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
-    log.append([current_datetime, USUARIO, 'info_empresas'])
-    driver.delete_all_cookies()
-    gc.collect()
-    
+    log = logear(log, 'info_empresas')
 
-    #unidades embrapii
+    # Unidades Embrapii
     main_info_unidades(driver)
-    current_datetime = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
-    log.append([current_datetime, USUARIO, 'info_unidades'])
-    driver.delete_all_cookies()
-    gc.collect()
+    log = logear(log, 'info_unidades')
 
-    # #projetos
+    # Projetos
     main_projetos_contratados(driver)
-    current_datetime = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
-    log.append([current_datetime, USUARIO, 'projetos_contratados'])
+    log = logear(log, 'projetos_contratados')
+
     main_projetos_empresas()
-    
+    log = logear(log, 'projetos_empresas')
+
     main_contratos(driver)
-    current_datetime = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
-    log.append([current_datetime, USUARIO, 'contratos'])
-    driver.delete_all_cookies()
-    gc.collect()
+    log = logear(log, 'contratos')
 
     main_projetos(driver)
-    current_datetime = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
-    log.append([current_datetime, USUARIO, 'projetos'])
-    driver.delete_all_cookies()
-    gc.collect()
+    log = logear(log, 'projetos')
     
     main_estudantes(driver)
-    current_datetime = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
-    log.append([current_datetime, USUARIO, 'estudantes'])
-    driver.delete_all_cookies()
-    gc.collect()
+    log = logear(log, 'estudantes')
     
     main_pedidos_pi(driver)
-    current_datetime = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
-    log.append([current_datetime, USUARIO, 'pedidos_pi'])
-    driver.delete_all_cookies()
-    gc.collect()
+    log = logear(log, 'pedidos_pi')
 
     main_macroentregas(driver)
-    current_datetime = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
-    log.append([current_datetime, USUARIO, 'macroentregas'])
+    log = logear(log, 'macroentregas')
+
     encerrar_webdriver(driver)
 
     main_classificacao_projeto()
-    current_datetime = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
-    log.append([current_datetime, USUARIO, 'classificacao_projetos'])
+    log = logear(log, 'classificacao_projetos')
 
     main_portfolio()
-    current_datetime = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
-    log.append([current_datetime, USUARIO, 'portfolio'])
+    log = logear(log, 'portfolio')
 
     registrar_log(log)
 
-    #sharepoint
+    # SharePoint
     levar_arquivos_sharepoint()
 
     print('Fim: ', datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
-
 
 def encerrar_webdriver(driver):
     driver.quit()
@@ -117,6 +96,9 @@ def encerrar_webdriver(driver):
             pass
     gc.collect()
 
+def logear(log, entidade):
+    log.append([datetime.now().strftime('%d/%m/%Y %H:%M:%S'), USUARIO, entidade])
+    return log
 
 if __name__ == "__main__":
     main_pipeline_srinfo()

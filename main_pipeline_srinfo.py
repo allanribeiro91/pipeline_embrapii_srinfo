@@ -93,7 +93,7 @@ def main_pipeline_srinfo():
             f'Finalizado em: {fim.strftime('%d/%m/%Y %H:%M:%S')}\n\n'
             f'_Duração total: {duracao}_'
     )
-    enviar_whatsapp(mensagem)
+    # enviar_whatsapp(mensagem)
 
     print('Fim: ', datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
 

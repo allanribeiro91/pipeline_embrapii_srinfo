@@ -61,7 +61,7 @@ campos_interesse = [
 ]
 
 novos_nomes_e_ordem = {
-    "Código EMBRAPII": "codigo_embrapii",
+    "Código EMBRAPII": "codigo_projeto",
     "ME": "num_macroentrega",
     "Projeto": "titulo",
     "Descrição dos entregáveis desta macroentrega": "descricao_macroentrega",

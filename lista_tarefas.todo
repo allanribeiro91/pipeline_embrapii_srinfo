@@ -15,17 +15,16 @@ PIPELINE DE DADOS SRINFO:
     ✔ 4.7. Tabela ue_linhas_atuacao @done(24-07-23 10:07)
     ✔ 4.8. Tabela info_empresas @done(24-07-23 10:07)
     ✘ 4.9. Tabela empresas_cnaes_secundarios @cancelled(24-07-23 10:36)
-        - Enriquecer os dados das empresas. Verificar melhor serviço disponível.
     ✔ 4.10. Tabela projetos_empresas @done(24-07-23 14:20)
     ✔ 4.11. Tabela info_empresas @done(24-07-23 15:51)
-☐ 5. Transformar os dados nas tabelas desejadas
+    ✔ 5. Transformar os dados nas tabelas desejadas @done(24-07-24 17:32)
     ✔ 5.1. Criar a tabela classificacao_projeto @done(24-07-22 11:48)
     ✔ 5.2. Criar a tabela portfolio @done(24-07-23 09:59)
-☐ 6. Mover para o Sharepoint
+    ✔ 6. Mover para o Sharepoint @done(24-07-24 17:32)
     ✔ 6.1. Criar o script para mover para o sharepoint @done(24-07-22 09:52)
     ✔ 6.2. Criar o DWPII no Sharepoint @done(24-07-22 09:52)
-    ☐ 6.3. Automatizar o envio dos arquivos para o sharepoint
-    ☐ 6.4. Limpar DWPII_copy e DWPII_up ao iniciar o pipeline
+    ✔ 6.3. Automatizar o envio dos arquivos para o sharepoint @done(24-07-24 17:32)
+    ✔ 6.4. Limpar DWPII_copy e DWPII_up ao iniciar o pipeline @done(24-07-24 17:32)
 ☐ 7. Logear as ações
     ☐ 7.1. Criar a planilha de logs
     ☐ 7.2. Criar scripts para logear as ações
@@ -37,3 +36,5 @@ PIPELINE DE DADOS SRINFO:
 ☐ 10. Documentar o pipeline
     ☐ 10.1. Criar planilha de documentação das tabelas
     ☐ 10.2. Criar documento de especificação do pipeline
+    
+    - Enriquecer os dados das empresas. Verificar melhor serviço disponível.

@@ -2,6 +2,7 @@ import os
 import sys
 import gc
 import psutil
+import pyshorteners
 from dotenv import load_dotenv
 from datetime import datetime
 
@@ -91,7 +92,7 @@ def main_pipeline_srinfo():
 
     fim = datetime.now()
     duracao = duracao_tempo(inicio, fim)
-    link = "https://embrapii.sharepoint.com/:x:/r/sites/GEEDD/Documentos%20Compartilhados/DWPII/classificacao_projeto.xlsx"
+    link = encurtar_url("https://embrapii.sharepoint.com/:x:/r/sites/GEEDD/Documentos%20Compartilhados/DWPII/classificacao_projeto.xlsx")
     mensagem = (
             f'*Pipeline SRInfo*\n'
             f'Iniciado em: {inicio.strftime('%d/%m/%Y %H:%M:%S')}\n'
@@ -131,6 +132,10 @@ def duracao_tempo(inicio, fim):
     duracao_formatada = f'{int(horas):02}:{int(minutos):02}:{int(segundos):02}'
 
     return duracao_formatada
+
+def encurtar_url(url):
+    s = pyshorteners.Shortener()
+    return s.tinyurl.short(url)
 
 if __name__ == "__main__":
     main_pipeline_srinfo()

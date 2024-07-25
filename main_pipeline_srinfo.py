@@ -27,10 +27,12 @@ from projeto.classificacao_projeto.main_classificacao_projeto import main_classi
 from projeto.portfolio.main_portfolio import main_portfolio
 from scripts_public.registrar_log import registrar_log
 from scripts_public.levar_arquivos_sharepoint import levar_arquivos_sharepoint
+from scripts_public.whatsapp import enviar_whatsapp
 
 def main_pipeline_srinfo():
 
     print('Início: ', datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+    inicio = datetime.now()
 
     log = []
 
@@ -83,6 +85,16 @@ def main_pipeline_srinfo():
     # SharePoint
     levar_arquivos_sharepoint()
 
+    fim = datetime.now()
+    duracao = duracao_tempo(inicio, fim)
+    mensagem = (
+            f'*Pipeline SRInfo*\n'
+            f'Iniciado em: {inicio.strftime('%d/%m/%Y %H:%M:%S')}\n'
+            f'Finalizado em: {fim.strftime('%d/%m/%Y %H:%M:%S')}\n\n'
+            f'_Duração total: {duracao}_'
+    )
+    enviar_whatsapp(mensagem)
+
     print('Fim: ', datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
 
 def encerrar_webdriver(driver):
@@ -99,6 +111,17 @@ def encerrar_webdriver(driver):
 def logear(log, entidade):
     log.append([datetime.now().strftime('%d/%m/%Y %H:%M:%S'), USUARIO, entidade])
     return log
+
+
+def duracao_tempo(inicio, fim):
+    duracao = fim - inicio
+    horas, resto = divmod(duracao.total_seconds(), 3600)
+    minutos, segundos = divmod(resto, 60)
+    
+    # Formatá-la como uma string no formato HH:MM:SS
+    duracao_formatada = f'{int(horas):02}:{int(minutos):02}:{int(segundos):02}'
+
+    return duracao_formatada
 
 if __name__ == "__main__":
     main_pipeline_srinfo()

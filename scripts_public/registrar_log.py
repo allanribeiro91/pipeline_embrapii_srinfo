@@ -3,7 +3,6 @@ import shutil
 import openpyxl
 import sys
 from dotenv import load_dotenv
-from datetime import datetime
 
 # Carregar .env
 load_dotenv()
@@ -28,6 +27,7 @@ def registrar_log(log):
         ws.title = "Log"
         ws.append(["ID", "Data da Atualização", "Usuário", "Nome da Planilha"])
         wb.save(log_copy)
+
     # Fazer uma cópia para DWPII UP caso exista
     if not os.path.exists(log_up):
         shutil.copy(log_copy, log_up)
@@ -48,6 +48,6 @@ def registrar_log(log):
     # Salvar o arquivo
     wb.save(log_up)
 
-# Executar função com um exemplo
+# Executar função
 if __name__ == "__main__":
     registrar_log()

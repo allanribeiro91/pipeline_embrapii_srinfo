@@ -2,6 +2,7 @@ import os
 import sys
 import gc
 import psutil
+import pyshorteners
 from dotenv import load_dotenv
 from datetime import datetime
 import pyautogui
@@ -30,6 +31,7 @@ from projeto.classificacao_projeto.main_classificacao_projeto import main_classi
 from projeto.portfolio.main_portfolio import main_portfolio
 from scripts_public.registrar_log import registrar_log
 from scripts_public.levar_arquivos_sharepoint import levar_arquivos_sharepoint
+from scripts_public.comparar_excel import comparar_excel
 from scripts_public.whatsapp import enviar_whatsapp
 
 def main_pipeline_srinfo():
@@ -88,13 +90,21 @@ def main_pipeline_srinfo():
     # SharePoint
     levar_arquivos_sharepoint()
 
+    # Calculando num de novos projetos, empresas e proj sem classificacao
+    novos = comparar_excel()
+
     fim = datetime.now()
     duracao = duracao_tempo(inicio, fim)
+    link = encurtar_url("https://embrapii.sharepoint.com/:x:/r/sites/GEEDD/Documentos%20Compartilhados/DWPII/classificacao_projeto.xlsx")
     mensagem = (
             f'*Pipeline SRInfo*\n'
             f'Iniciado em: {inicio.strftime('%d/%m/%Y %H:%M:%S')}\n'
-            f'Finalizado em: {fim.strftime('%d/%m/%Y %H:%M:%S')}\n\n'
-            f'_Duração total: {duracao}_'
+            f'Finalizado em: {fim.strftime('%d/%m/%Y %H:%M:%S')}\n'
+            f'_Duração total: {duracao}_\n\n'
+            f'Novos projetos: {novos[0]}\n'
+            f'Novas empresas: {novos[1]}\n'
+            f'Projetos sem classificação: {novos[2]}\n'
+            f'Link para classificação dos projetos: {link}'
     )
     enviar_whatsapp(mensagem)
 
@@ -124,6 +134,10 @@ def duracao_tempo(inicio, fim):
     duracao_formatada = f'{int(horas):02}:{int(minutos):02}:{int(segundos):02}'
 
     return duracao_formatada
+
+def encurtar_url(url):
+    s = pyshorteners.Shortener()
+    return s.tinyurl.short(url)
 
 if __name__ == "__main__":
     main_pipeline_srinfo()

@@ -18,17 +18,6 @@ def baixar_dados_srinfo_projetos_contratados(driver):
 
     username = os.getenv('USERNAME')
     password = os.getenv('PASSWORD')
-
-    # Configurar o WebDriver usando webdriver-manager
-    # edge_service = EdgeService(EdgeChromiumDriverManager().install())
-    # options = webdriver.EdgeOptions()
-    # options.add_argument('--disable-gpu')
-    # options.add_argument('--no-sandbox')
-    # options.add_argument('start-maximized')
-    # options.add_argument('disable-infobars')
-    # options.add_argument('--disable-extensions')
-
-    # driver = webdriver.Edge(service=edge_service, options=options)
     
     try:
         #Acessar tela de login
@@ -78,8 +67,6 @@ def baixar_dados_srinfo_projetos_contratados(driver):
 
         carregar_dados_e_fazer_download(driver=driver)
     finally:
-        # driver.quit()
-        # print('Dados baixados!')
         pass
     
 def carregar_dados_e_fazer_download(driver):

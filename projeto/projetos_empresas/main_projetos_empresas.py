@@ -25,7 +25,7 @@ from criar_tabela_projetos_empresas import criar_tabela_projetos_empresas
 
 #definir variáveis de copiar_e_renomear_arquivos
 origens = {
-        'projetos_contratados': os.path.join(ROOT, 'analises_relatorios', 'projetos_contratados', 'step_1_data_raw', 'raw_relatorio_projetos_contratados.xlsx'),
+        'projetos_contratados': os.path.join(ROOT, 'analises_relatorios', 'projetos_contratados', 'step_1_data_raw', 'raw_relatorio_projetos_contratados_1.xlsx'),
     }
 
 # Define o caminho relativo da pasta de destino

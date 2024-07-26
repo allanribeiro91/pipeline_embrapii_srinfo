@@ -4,6 +4,9 @@ import gc
 import psutil
 from dotenv import load_dotenv
 from datetime import datetime
+import pyautogui
+import time
+
 
 # Adicionar o caminho do diretório raiz ao sys.path
 load_dotenv()
@@ -57,11 +60,11 @@ def main_pipeline_srinfo():
     main_projetos_empresas()
     log = logear(log, 'projetos_empresas')
 
-    main_contratos(driver)
-    log = logear(log, 'contratos')
-
     main_projetos(driver)
     log = logear(log, 'projetos')
+
+    main_contratos(driver)
+    log = logear(log, 'contratos')
     
     main_estudantes(driver)
     log = logear(log, 'estudantes')
@@ -93,7 +96,7 @@ def main_pipeline_srinfo():
             f'Finalizado em: {fim.strftime('%d/%m/%Y %H:%M:%S')}\n\n'
             f'_Duração total: {duracao}_'
     )
-    # enviar_whatsapp(mensagem)
+    enviar_whatsapp(mensagem)
 
     print('Fim: ', datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
 
@@ -111,7 +114,6 @@ def encerrar_webdriver(driver):
 def logear(log, entidade):
     log.append([datetime.now().strftime('%d/%m/%Y %H:%M:%S'), USUARIO, entidade])
     return log
-
 
 def duracao_tempo(inicio, fim):
     duracao = fim - inicio

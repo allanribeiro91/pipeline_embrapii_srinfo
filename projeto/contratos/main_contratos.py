@@ -22,6 +22,7 @@ sys.path.append(CURRENT_DIR)
 from scripts_public.scripts_public import baixar_e_juntar_arquivos
 from scripts_public.copiar_arquivos_finalizados_para_dwpii import copiar_arquivos_finalizados_para_dwpii
 from scripts_public.processar_excel import processar_excel
+from scripts_public.filtrar_projetos import filtrar_projetos
 # from tratamento_dados import processar_dados
 
 #Definição da função
@@ -85,6 +86,7 @@ campos_valor = ['valor_embrapii', 'valor_empresa', 'valor_unidade_embrapii']
 
 def processar_dados():
     processar_excel(arquivo_origem, campos_interesse, novos_nomes_e_ordem, arquivo_destino, campos_data, campos_valor)
+    filtrar_projetos(arquivo_destino)
 
 #Executar função
 if __name__ == "__main__":

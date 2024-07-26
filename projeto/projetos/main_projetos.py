@@ -1,5 +1,6 @@
 import os
 import sys
+import pandas as pd
 from dotenv import load_dotenv
 
 #carregar .env
@@ -75,6 +76,13 @@ novos_nomes_e_ordem = {
 
 def processar_dados():
     processar_excel(arquivo_origem, campos_interesse, novos_nomes_e_ordem, arquivo_destino)
+    filtrar_projetos(arquivo_destino)
+
+
+def filtrar_projetos(caminho):
+    df = pd.read_excel(caminho)
+    df_filtrado = df[df['status'] != 'Desqualificado']
+    df_filtrado.to_excel(caminho, index=False)
 
 #Executar função
 if __name__ == "__main__":

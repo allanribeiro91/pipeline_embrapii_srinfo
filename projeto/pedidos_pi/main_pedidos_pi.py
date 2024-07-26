@@ -22,7 +22,7 @@ sys.path.append(CURRENT_DIR)
 from scripts_public.scripts_public import baixar_e_juntar_arquivos
 from scripts_public.copiar_arquivos_finalizados_para_dwpii import copiar_arquivos_finalizados_para_dwpii
 from scripts_public.processar_excel import processar_excel
-# from tratamento_dados import processar_dados
+from scripts_public.filtrar_projetos import filtrar_projetos
 
 #Definição da função
 def main_pedidos_pi(driver):
@@ -76,6 +76,7 @@ campos_valor = []
 
 def processar_dados():
     processar_excel(arquivo_origem, campos_interesse, novos_nomes_e_ordem, arquivo_destino, campos_data, campos_valor)
+    filtrar_projetos(arquivo_destino)
 
 
 if __name__ == "__main__":

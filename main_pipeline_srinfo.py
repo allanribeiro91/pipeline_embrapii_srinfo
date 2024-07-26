@@ -5,8 +5,6 @@ import psutil
 import pyshorteners
 from dotenv import load_dotenv
 from datetime import datetime
-import pyautogui
-import time
 
 
 # Adicionar o caminho do diretório raiz ao sys.path

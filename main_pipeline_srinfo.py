@@ -6,7 +6,6 @@ import pyshorteners
 from dotenv import load_dotenv
 from datetime import datetime
 
-
 # Adicionar o caminho do diretório raiz ao sys.path
 load_dotenv()
 ROOT = os.getenv('ROOT')

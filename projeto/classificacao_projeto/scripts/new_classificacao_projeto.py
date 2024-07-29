@@ -27,7 +27,8 @@ def new_classificacao_projeto():
         "Título", 
         "Título público", 
         "Objetivo", 
-        "Descrição pública"]
+        "Descrição pública",
+        "Status"]
     df_projetos_selecionado = df_projetos[colunas_projetos]
 
     colunas_unidades_embrapii = [
@@ -58,12 +59,14 @@ def new_classificacao_projeto():
         "Título": "titulo",
         "Título público": "titulo_publico",
         "Objetivo": "objetivo",
-        "Descrição pública": "descricao_publica"
+        "Descrição pública": "descricao_publica",
+        "Status": "status",
     })
 
     # Definir a ordem das colunas
     ordem_colunas = [
         "codigo_projeto",
+        "status",
         "ue_tipo",
         "ue_nome",
         "ue_competencias",

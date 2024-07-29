@@ -9,9 +9,13 @@ def atualizacao_classificao_projeto():
     caminho_new = os.path.join(base_dir, 'projeto', 'classificacao_projeto', 'step_2_stage_area', 'new_classificacao_projeto.xlsx')
     caminho_destino = os.path.join(base_dir, 'projeto', 'classificacao_projeto', 'step_3_data_processed', 'classificacao_projeto.xlsx')
 
+
+
+
     # Ler as planilhas
     df_atual = pd.read_excel(caminho_atual, sheet_name='Sheet1')
     df_new = pd.read_excel(caminho_new)
+    df_new = df_new[df_new['status'] != 'Desqualificado']
 
     # Identificar novos registros
     novos_registros = df_new[~df_new['codigo_projeto'].isin(df_atual['codigo_projeto'])]

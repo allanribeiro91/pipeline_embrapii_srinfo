@@ -18,7 +18,7 @@ def enviar_whatsapp(mensagem):
         grupo = 'GED Embrapii'
         whatsapp = f'https://web.whatsapp.com/send?text={quote(mensagem)}&app_absent=0&selectedContactName={quote(grupo)}'
         webbrowser.open(whatsapp)
-        sleep(20)
+        sleep(50)
         
         #selecionar o grupo
         pyautogui.typewrite(grupo)

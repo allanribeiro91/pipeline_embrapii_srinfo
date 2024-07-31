@@ -4,7 +4,7 @@ from datetime import datetime
 
 def zipar_arquivos(origem, destino):
     current_datetime = datetime.now().strftime('%Y.%m.%d_%Hh%Mm%Ss')
-    arquivo_zip = os.path.join(destino, f'{current_datetime}.zip')
+    arquivo_zip = os.path.join(destino, f'srinfo_{current_datetime}.zip')
 
     # Cria um objeto ZipFile no modo de escrita
     with zipfile.ZipFile(arquivo_zip, 'w') as zipf:

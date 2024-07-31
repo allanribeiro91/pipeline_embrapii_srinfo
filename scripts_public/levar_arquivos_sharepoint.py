@@ -17,12 +17,14 @@ sys.path.append(PATH_OFFICE)
 
 from upload_files import upload_files
 from zipar_arquivos import zipar_arquivos
+from criar_db_sqlite import gerar_db_sqlite
 
 def levar_arquivos_sharepoint():
 
+    gerar_db_sqlite()
     zipar_arquivos(DWII_COPY, DWII_BACKUP)
     upload_files(DWII_BACKUP, "DWPII_backup")
-    upload_files(PASTA_ARQUIVOS, "DWPII")
+    upload_files(PASTA_ARQUIVOS, "DWPII/srinfo")
 
 #Executar função
 if __name__ == "__main__":

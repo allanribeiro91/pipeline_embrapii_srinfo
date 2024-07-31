@@ -25,7 +25,7 @@ def buscar_arquivos_sharepoint():
     apagar_arquivos_pasta(DWPII_UP)
     apagar_arquivos_pasta(DWPII_BACKUP)
 
-    get_files("DWPII", CURRENT_DIR)
+    get_files("DWPII/srinfo", CURRENT_DIR)
 
 
 #Executar função

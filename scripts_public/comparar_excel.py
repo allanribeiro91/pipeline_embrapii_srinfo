@@ -22,7 +22,7 @@ def comparar_excel():
     # Calculando numero de novos projetos, novas empresas e numero de projetos sem classificacao 
     proj = len(up[~up['codigo_projeto'].isin(copy['codigo_projeto'])])
     emp = len(up[~up['cnpj'].isin(copy['cnpj'])])
-    clas = len(classif[classif['tecnologia_habilitadora'] == 'Não definido'])
+    clas = len(classif[classif['Tecnologias Habilitadoras'] == 'Não definido'])
 
     return [proj, emp, clas]
 

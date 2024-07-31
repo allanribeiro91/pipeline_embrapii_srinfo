@@ -53,20 +53,25 @@ def criar_tabela_portfolio():
     df_projetos_selecionado = df_projetos[colunas_projetos]
 
     colunas_classificacao_projeto = [
-        "codigo_projeto",
-        "tecnologia_habilitadora",
-        "area_aplicacao",
+        "Código",
+        "Tecnologias Habilitadoras",
+        "Áreas de Aplicação",
     ]
     df_classificacao_projeto_selecionado = df_classificacao_projeto[colunas_classificacao_projeto]
 
-
     # Mesclar os dados com base na chave "codigo_projeto"
     df_portfolio = df_contratos_selecionado.merge(df_projetos_selecionado, on='codigo_projeto', how='left')
-    df_portfolio = df_portfolio.merge(df_classificacao_projeto_selecionado, on='codigo_projeto', how='left')
+    df_portfolio = df_portfolio.merge(df_classificacao_projeto_selecionado, left_on='codigo_projeto', right_on='Código', how='left')
     # df_portfolio = df_portfolio.merge(df_projetos_contratados_selecionados, on='codigo_projeto', how='left')
 
     # Adicionar a coluna "data_extracao_dados" com a data de hoje
     df_portfolio['data_extracao_dados'] = datetime.now().strftime('%d/%m/%Y')
+
+    df_portfolio = df_portfolio.rename(columns={
+        'Tecnologias Habilitadoras': 'tecnologia_habilitadora',
+        'Áreas de Aplicação': 'area_aplicacao',
+    })
+
 
     # Reordenar as colunas conforme especificado
     colunas_finais = [

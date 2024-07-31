@@ -16,6 +16,7 @@ sys.path.append(ROOT)
 from scripts_public.buscar_arquivos_sharepoint import buscar_arquivos_sharepoint
 from scripts_public.webdriver import configurar_webdriver
 from empresa.info_empresas.main_info_empresas import main_info_empresas
+from analises_relatorios.empresas_contratantes.main_empresas_contratantes import main_empresas_contratantes
 from unidade_embrapii.info_unidades.main_info_unidades import main_info_unidades
 from analises_relatorios.projetos_contratados.main_projetos_contratados import main_projetos_contratados
 from projeto.contratos.main_contratos import main_contratos
@@ -38,21 +39,24 @@ def main_pipeline_srinfo():
 
     log = []
 
-    # SharePoint
+    #SharePoint
     buscar_arquivos_sharepoint()
 
-    # Configurar o WebDriver
+    #Configurar o WebDriver
     driver = configurar_webdriver()
 
-    # Empresas
+    #Empresas
     main_info_empresas(driver)
     log = logear(log, 'info_empresas')
 
-    # Unidades Embrapii
+    main_empresas_contratantes(driver)
+    log = logear(log, 'empresas_contratantes')
+
+    #Unidades Embrapii
     main_info_unidades(driver)
     log = logear(log, 'info_unidades')
 
-    # Projetos
+    #Projetos
     main_projetos_contratados(driver)
     log = logear(log, 'projetos_contratados')
 
@@ -84,10 +88,10 @@ def main_pipeline_srinfo():
 
     registrar_log(log)
 
-    # SharePoint
+    #SharePoint
     levar_arquivos_sharepoint()
 
-    # Calculando num de novos projetos, empresas e proj sem classificacao
+    #Calculando num de novos projetos, empresas e proj sem classificacao
     novos = comparar_excel()
 
     fim = datetime.now()

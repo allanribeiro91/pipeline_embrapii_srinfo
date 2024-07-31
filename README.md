@@ -2,27 +2,32 @@
 
 ## Objetivo
 
-O **pipeline_embrapii_srinfo** tem como objetivo realizar a extração, transformação e carga de dados do SRInfo da Embrapii para o DWPII.  
-Este processo automatizado visa facilitar a integração e a análise dos dados, garantindo que estejam prontos para uso em relatórios e outras aplicações analíticas.
+O **pipeline_embrapii_srinfo** tem como objetivo realizar a extração, transformação e carga de dados do SRInfo da Embrapii para o DWPII.
 
 ## Sequência lógica do script
 
-- Ver o `main_pipeline_srinfo.py`
-
 1. **Faz uma cópia dos dados do DWPII**  
    Acessa a pasta do SharePoint e faz cópia dos arquivos atuais.
+
 2. **Baixa os dados do SRInfo**  
    Acessa o SRInfo e baixa os dados das diferentes tabelas.
+
 3. **Cria as tabelas normalizadas**  
    Processa os dados: retirada de dados redundantes, padronização do nome dos campos e das chaves primárias e secundárias e criação das tabelas normalizadas.
+
 4. **Registra os logs**  
    Registra as operações realizadas em uma tabela de logs.
+
 5. **Carrega os dados no DWPII backup**  
    Cria um arquivo .zip com as planilhas atuais que foram baixadas no início do script e salva em uma pasta específica do SharePoint.
+
 6. **Carrega os dados no DWPII**  
    Carrega os novos arquivos processados na pasta do SharePoint.
+   
 7. **Envia mensagem no WhatsApp**  
    Encaminha mensagem com resumo da operação para o grupo do WhatsApp.
+
+- Ver o `main_pipeline_srinfo.py`
 
 ## Como usar
 

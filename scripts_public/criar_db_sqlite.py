@@ -1,12 +1,9 @@
 import os
-import sys
 import pandas as pd
 import sqlite3
 from dotenv import load_dotenv
-import pydot
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy_schemadisplay import create_schema_graph
-from mover_arquivos import mover_arquivos_excel
 import shutil
 
 # Carregar variáveis de ambiente do arquivo .env
@@ -51,7 +48,7 @@ def gerar_db_sqlite():
     # Fechar a conexão com o banco de dados
     conn.close()
 
-    gerar_der()
+    # gerar_der()
 
 
 def gerar_der():

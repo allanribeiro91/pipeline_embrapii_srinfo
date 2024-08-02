@@ -42,6 +42,7 @@ def new_classificacao_projeto():
     # Criar novas colunas
     df_merged["tecnologia_habilitadora"] = ""
     df_merged["area_aplicacao"] = ""
+    df_merged["missoes"] = ""
 
 
     #remover colunas
@@ -76,7 +77,7 @@ def new_classificacao_projeto():
     
     df_merged['Número de Empresas no Projeto'] = df_merged['Empresas'].apply(contar_empresas)
 
-    # Renomear e reordenar as colunas
+    # Renomear as colunas
     df_merged = df_merged.rename(columns={
         'Código': 'Código',
         'Unidade EMBRAPII': 'Unidade EMBRAPII',
@@ -90,6 +91,7 @@ def new_classificacao_projeto():
         'competencia': 'Competência UE',
         'tecnologia_habilitadora': 'Tecnologias Habilitadoras',
         'area_aplicacao': 'Áreas de Aplicação',
+        'missoes': 'Missões - CNDI final',
         'Projeto': 'Projeto',
         'Título público': 'Título público',
         'Objetivo': 'Objetivo',
@@ -120,6 +122,7 @@ def new_classificacao_projeto():
         'Competência UE',
         'Tecnologias Habilitadoras',
         'Áreas de Aplicação',
+        'Missões - CNDI final',
         'Projeto',
         'Título público',
         'Objetivo',
@@ -175,8 +178,8 @@ def new_classificacao_projeto():
         format_currency = workbook.add_format({'num_format': 'R$ #,##0.00'})
 
         # Aplicar formatação
-        worksheet.set_column('T:T', None, format_date)
-        for col in ['V', 'W', 'X', 'Y']:
+        worksheet.set_column('U:U', None, format_date)
+        for col in ['W', 'X', 'Y', 'Z']:
             worksheet.set_column(f'{col}:{col}', None, format_currency)
 
 
@@ -261,6 +264,10 @@ def mesclar_dados_empresas(df_empresas_norm, df_empresas_contratantes, df_cnae):
         else:
             return "Não informado"
     df_merged['porte_cnpj'] = df_merged['Faixa de faturamento declarada'].apply(determinar_porte)
+
+    #Exportar planilha para info_empresas
+    caminho_info_empresas = os.path.join(ROOT, 'empresa', 'info_empresas', 'step_2_stage_area', 'empresas_porte.xlsx')
+    df_merged.to_excel(caminho_info_empresas, index=False)
 
     # Agregar os dados pelo Código
     df_aggregated = df_merged.groupby('Código').agg({

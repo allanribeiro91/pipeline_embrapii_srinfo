@@ -15,7 +15,7 @@ sys.path.append(ROOT)
 # Importar o módulo principal de contratos
 from scripts_public.buscar_arquivos_sharepoint import buscar_arquivos_sharepoint
 from scripts_public.webdriver import configurar_webdriver
-from empresa.info_empresas.main_info_empresas import main_info_empresas
+from empresa.info_empresas.main_info_empresas import main_info_empresas_baixar, main_info_empresas_processar
 from analises_relatorios.empresas_contratantes.main_empresas_contratantes import main_empresas_contratantes
 from unidade_embrapii.info_unidades.main_info_unidades import main_info_unidades
 from analises_relatorios.projetos_contratados.main_projetos_contratados import main_projetos_contratados
@@ -42,11 +42,11 @@ def main_pipeline_srinfo():
     #SharePoint
     buscar_arquivos_sharepoint()
 
-    #Configurar o WebDriver
+    # Configurar o WebDriver
     driver = configurar_webdriver()
 
     #Empresas
-    main_info_empresas(driver)
+    main_info_empresas_baixar(driver)
     log = logear(log, 'info_empresas')
 
     main_empresas_contratantes(driver)
@@ -83,6 +83,8 @@ def main_pipeline_srinfo():
     main_classificacao_projeto()
     log = logear(log, 'classificacao_projetos')
 
+    main_info_empresas_processar()
+
     main_portfolio()
     log = logear(log, 'portfolio')
 
@@ -96,7 +98,7 @@ def main_pipeline_srinfo():
 
     fim = datetime.now()
     duracao = duracao_tempo(inicio, fim)
-    link = encurtar_url("https://embrapii.sharepoint.com/:x:/r/sites/GEEDD/Documentos%20Compartilhados/DWPII/classificacao_projeto.xlsx")
+    link = encurtar_url("https://embrapii.sharepoint.com/:x:/r/sites/GEEDD/Documentos%20Compartilhados/DWPII/srinfo/classificacao_projeto.xlsx")
     mensagem = (
             f'*Pipeline SRInfo*\n'
             f'Iniciado em: {inicio.strftime('%d/%m/%Y %H:%M:%S')}\n'

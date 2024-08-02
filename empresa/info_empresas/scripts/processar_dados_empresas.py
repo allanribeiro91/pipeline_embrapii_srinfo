@@ -10,7 +10,7 @@ ROOT = os.getenv('ROOT')
 SCRIPTS_PUBLIC_PATH = os.path.abspath(os.path.join(ROOT, 'scripts_public'))
 sys.path.append(SCRIPTS_PUBLIC_PATH)
 
-from processar_excel import processar_excel
+from scripts_public.processar_excel import processar_excel
 
 # Definições dos caminhos e nomes de arquivos
 origem = os.path.join(ROOT, 'empresa', 'info_empresas', 'step_2_stage_area')
@@ -71,8 +71,6 @@ novos_nomes_e_ordem = {
 }
 
 
-def processar_dados():
+def processar_dados_empresas():
     processar_excel(arquivo_origem, campos_interesse, novos_nomes_e_ordem, arquivo_destino)
 
-if __name__ == "__main__":
-    processar_dados()

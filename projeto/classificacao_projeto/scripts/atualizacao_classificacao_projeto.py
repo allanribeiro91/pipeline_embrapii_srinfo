@@ -1,13 +1,18 @@
 import pandas as pd
 import openpyxl
 import os
+from dotenv import load_dotenv
+
+#carregar .env
+load_dotenv()
+ROOT = os.getenv('ROOT')
 
 def atualizacao_classificao_projeto():
     # Define os caminhos das planilhas
-    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
-    caminho_atual = os.path.join(base_dir, 'projeto', 'classificacao_projeto', 'step_1_data_raw', 'atual_classificacao_projeto.xlsx')
-    caminho_new = os.path.join(base_dir, 'projeto', 'classificacao_projeto', 'step_2_stage_area', 'new_classificacao_projeto.xlsx')
-    caminho_destino = os.path.join(base_dir, 'projeto', 'classificacao_projeto', 'step_3_data_processed', 'classificacao_projeto.xlsx')
+    # base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+    caminho_atual = os.path.join(ROOT, 'projeto', 'classificacao_projeto', 'step_1_data_raw', 'atual_classificacao_projeto.xlsx')
+    caminho_new = os.path.join(ROOT, 'projeto', 'classificacao_projeto', 'step_2_stage_area', 'new_classificacao_projeto.xlsx')
+    caminho_destino = os.path.join(ROOT, 'projeto', 'classificacao_projeto', 'step_3_data_processed', 'classificacao_projeto.xlsx')
 
     # Ler as planilhas
     df_atual = pd.read_excel(caminho_atual, sheet_name='Planilha1')
@@ -15,10 +20,11 @@ def atualizacao_classificao_projeto():
 
     # Identificar novos registros
     novos_registros = df_new[~df_new['Código'].isin(df_atual['Código'])]
-    print(novos_registros.head())
+
     # Adicionar colunas com valor "Não definido" para os novos registros
     novos_registros['Tecnologias Habilitadoras'] = "Não definido"
     novos_registros['Áreas de Aplicação'] = "Não definido"
+    novos_registros['Missões - CNDI final'] = "Não definido"
 
     # Carregar a planilha atual com openpyxl
     wb = openpyxl.load_workbook(caminho_atual)
@@ -29,7 +35,7 @@ def atualizacao_classificao_projeto():
         ws.append(list(row))
 
     # Salvar a nova planilha temporariamente para manipulação com pandas
-    caminho_temp = os.path.join(base_dir, 'projeto', 'classificacao_projeto', 'temp_classificacao_projeto.xlsx')
+    caminho_temp = os.path.join(ROOT, 'projeto', 'classificacao_projeto', 'temp_classificacao_projeto.xlsx')
     wb.save(caminho_temp)
 
     # Recarregar a planilha temporária com pandas para reordenar

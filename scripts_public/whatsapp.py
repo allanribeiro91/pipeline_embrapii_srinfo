@@ -2,15 +2,8 @@ import os
 from urllib.parse import quote
 import webbrowser
 from time import sleep
-from datetime import datetime
 import pyautogui
-from dotenv import load_dotenv
 
-load_dotenv()
-ROOT = os.getenv('ROOT')
-PATH_SETA_ENVIAR_GRUPO = os.path.abspath(os.path.join(ROOT, 'scripts_public', 'seta_enviar_grupo.png'))
-PATH_SETA = os.path.abspath(os.path.join(ROOT, 'scripts_public', 'seta.png'))
-PATH_NOME_GRUPO = os.path.abspath(os.path.join(ROOT, 'scripts_public', 'nome_grupo.png'))
 
 def enviar_whatsapp(mensagem):
     try:

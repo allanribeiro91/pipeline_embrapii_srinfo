@@ -31,6 +31,7 @@ from scripts_public.registrar_log import registrar_log
 from scripts_public.levar_arquivos_sharepoint import levar_arquivos_sharepoint
 from scripts_public.comparar_excel import comparar_excel
 from scripts_public.whatsapp import enviar_whatsapp
+from scripts_public.report_snapshot import gerar_report_snapshot
 
 def main_pipeline_srinfo():
 
@@ -93,12 +94,16 @@ def main_pipeline_srinfo():
     #SharePoint
     levar_arquivos_sharepoint()
 
+    #Report Snapshot Embrapii
+    gerar_report_snapshot()
+
     #Calculando num de novos projetos, empresas e proj sem classificacao
     novos = comparar_excel()
 
     fim = datetime.now()
     duracao = duracao_tempo(inicio, fim)
-    link = encurtar_url("https://embrapii.sharepoint.com/:x:/r/sites/GEEDD/Documentos%20Compartilhados/DWPII/srinfo/classificacao_projeto.xlsx")
+    link = "https://embrapii.sharepoint.com/:x:/r/sites/GEEDD/Documentos%20Compartilhados/DWPII/srinfo/classificacao_projeto.xlsx"
+    link_snapshot = "https://embrapii.sharepoint.com/:b:/s/GEEDD/ERShw-RwRO9BimzX1_nYtREBbG0q1_DBlYmVGIPpKuXkQA?e=wAPf5B"
     mensagem = (
             f'*Pipeline SRInfo*\n'
             f'Iniciado em: {inicio.strftime('%d/%m/%Y %H:%M:%S')}\n'
@@ -106,7 +111,8 @@ def main_pipeline_srinfo():
             f'_Duração total: {duracao}_\n\n'
             f'Novos projetos: {novos[0]}\n'
             f'Novas empresas: {novos[1]}\n'
-            f'Projetos sem classificação: {novos[2]}\n'
+            f'Projetos sem classificação: {novos[2]}\n\n'
+            f'Relatório Executivo (snapshot): {link_snapshot}\n\n'
             f'Link para classificação dos projetos: {link}'
     )
     enviar_whatsapp(mensagem)

@@ -18,6 +18,7 @@ from scripts_public.webdriver import configurar_webdriver
 from empresa.info_empresas.main_info_empresas import main_info_empresas_baixar, main_info_empresas_processar
 from analises_relatorios.empresas_contratantes.main_empresas_contratantes import main_empresas_contratantes
 from unidade_embrapii.info_unidades.main_info_unidades import main_info_unidades
+from unidade_embrapii.equipe_ue.main_equipe_ue import main_equipe_ue
 from analises_relatorios.projetos_contratados.main_projetos_contratados import main_projetos_contratados
 from projeto.contratos.main_contratos import main_contratos
 from projeto.projetos.main_projetos import main_projetos
@@ -56,6 +57,9 @@ def main_pipeline_srinfo():
     #Unidades Embrapii
     main_info_unidades(driver)
     log = logear(log, 'info_unidades')
+
+    main_equipe_ue(driver)
+    log = logear(log, 'equipe_ue')
 
     #Projetos
     main_projetos_contratados(driver)
@@ -102,7 +106,7 @@ def main_pipeline_srinfo():
 
     fim = datetime.now()
     duracao = duracao_tempo(inicio, fim)
-    link = "https://embrapii.sharepoint.com/:x:/r/sites/GEEDD/Documentos%20Compartilhados/DWPII/srinfo/classificacao_projeto.xlsx"
+    link = "https://embrapii.sharepoint.com/sites/GEEDD/Documentos%20Compartilhados/Forms/AllItems.aspx?id=%2Fsites%2FGEEDD%2FDocumentos%20Compartilhados%2FDWPII%2Fsrinfo&viewid=e04e1580%2D89e7%2D44c9%2D981e%2D4cb420a3a366"
     link_snapshot = "https://embrapii.sharepoint.com/:b:/s/GEEDD/ERShw-RwRO9BimzX1_nYtREBbG0q1_DBlYmVGIPpKuXkQA?e=wAPf5B"
     mensagem = (
             f'*Pipeline SRInfo*\n'
@@ -115,6 +119,7 @@ def main_pipeline_srinfo():
             f'Relatório Executivo (snapshot): {link_snapshot}\n\n'
             f'Link para classificação dos projetos: {link}'
     )
+    print(mensagem)
     enviar_whatsapp(mensagem)
 
     print('Fim: ', datetime.now().strftime('%d/%m/%Y %H:%M:%S'))

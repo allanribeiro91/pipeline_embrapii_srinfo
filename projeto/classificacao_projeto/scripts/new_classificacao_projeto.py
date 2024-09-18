@@ -105,7 +105,6 @@ def new_classificacao_projeto():
         'Valor aportado EMBRAPII': 'Valor aportado EMBRAPII',
         'Valor aportado Empresa': 'Valor aportado Empresa',
         'Valor aportado Unidade': 'Valor aportado pela Unidade',
-        'Pedidos de propriedade Intelectual': 'Pedidos de Propriedade Intelectual'
     })
 
     # Ordem das colunas conforme a lista fornecida
@@ -136,7 +135,6 @@ def new_classificacao_projeto():
         'Valor aportado EMBRAPII',
         'Valor aportado Empresa',
         'Valor aportado pela Unidade',
-        'Pedidos de Propriedade Intelectual'
     ]
 
     # Reordenar as colunas

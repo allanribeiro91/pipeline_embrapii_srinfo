@@ -42,6 +42,9 @@ def gerar_report_snapshot():
     # Exportar para PDF
     workbook.ExportAsFixedFormat(0, pdf_path)
 
+    #salvar
+    workbook.Save()
+
     # Fechar o workbook e o Excel
     workbook.Close(False)
     excel.Application.Quit()

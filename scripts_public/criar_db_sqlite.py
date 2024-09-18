@@ -32,6 +32,9 @@ def gerar_db_sqlite():
         if filename == "classificacao_projeto.xlsx":
             continue
 
+        if filename == "classificacao_tematica_projetos.xlsx":
+            continue
+
         if filename.endswith(".xlsx"):
             filepath = os.path.join(DWPII_UP, filename)
             # Ler a planilha

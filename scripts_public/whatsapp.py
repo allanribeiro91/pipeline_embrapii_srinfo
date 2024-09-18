@@ -17,6 +17,7 @@ def enviar_whatsapp(mensagem):
         pyautogui.typewrite(grupo)
         sleep(2)
         pyautogui.press('enter')
+        sleep(2)
         pyautogui.press('tab')
         pyautogui.press('tab')
         pyautogui.press('tab')

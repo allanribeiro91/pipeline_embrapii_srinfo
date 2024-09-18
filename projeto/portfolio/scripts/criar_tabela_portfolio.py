@@ -56,6 +56,7 @@ def criar_tabela_portfolio():
         "Código",
         "Tecnologias Habilitadoras",
         "Áreas de Aplicação",
+        "Missões - CNDI final",
     ]
     df_classificacao_projeto_selecionado = df_classificacao_projeto[colunas_classificacao_projeto]
 
@@ -70,6 +71,7 @@ def criar_tabela_portfolio():
     df_portfolio = df_portfolio.rename(columns={
         'Tecnologias Habilitadoras': 'tecnologia_habilitadora',
         'Áreas de Aplicação': 'area_aplicacao',
+        'Missões - CNDI final': 'missoes_cndi'
     })
 
 
@@ -88,6 +90,7 @@ def criar_tabela_portfolio():
         "modalidade_financiamento",
         "uso_recurso_obrigatorio",
         "tecnologia_habilitadora",
+        "missoes_cndi",
         "area_aplicacao",
         "projeto",
         "trl_inicial",

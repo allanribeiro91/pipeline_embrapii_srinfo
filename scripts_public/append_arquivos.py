@@ -3,6 +3,7 @@ import pandas as pd
 from datetime import datetime
 import win32com.client as win32
 import shutil
+import stat
 
 def remove_protection(file_path, temp_folder):
     excel = win32.DispatchEx('Excel.Application')
@@ -63,5 +64,10 @@ def append_excel_files(diretorio, nome_arquivo):
         final_df.to_excel(output_file, index=False)
 
     # Apaga a pasta data_temp e todo o seu conteúdo
-    shutil.rmtree(data_temp_folder)
+    def on_rm_error(func, path, exc_info):
+    # Define as permissões para permitir a exclusão
+        os.chmod(path, stat.S_IWRITE)
+        func(path)
+
+    shutil.rmtree(data_temp_folder, onerror=on_rm_error)
 

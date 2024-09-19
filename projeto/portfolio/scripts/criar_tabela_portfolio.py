@@ -64,6 +64,7 @@ def criar_tabela_portfolio():
     df_portfolio = df_contratos_selecionado.merge(df_projetos_selecionado, on='codigo_projeto', how='left')
     df_portfolio = df_portfolio.merge(df_classificacao_projeto_selecionado, left_on='codigo_projeto', right_on='Código', how='left')
     # df_portfolio = df_portfolio.merge(df_projetos_contratados_selecionados, on='codigo_projeto', how='left')
+    df_portfolio = df_portfolio.drop_duplicates(subset='codigo_projeto', keep='first')
 
     # Adicionar a coluna "data_extracao_dados" com a data de hoje
     df_portfolio['data_extracao_dados'] = datetime.now().strftime('%d/%m/%Y')

@@ -25,6 +25,8 @@ def atualizacao_classificao_projeto():
     novos_registros['Tecnologias Habilitadoras'] = "Não definido"
     novos_registros['Áreas de Aplicação'] = "Não definido"
     novos_registros['Missões - CNDI final'] = "Não definido"
+    novos_registros['Amazônia'] = "Não definido"
+    novos_registros['Descarbonização'] = "Não definido"
     # novos_registros = novos_registros.drop('Pedidos de Propriedade Intelectual', axis=1)
 
 

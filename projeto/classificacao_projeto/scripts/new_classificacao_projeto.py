@@ -43,6 +43,8 @@ def new_classificacao_projeto():
     df_merged["tecnologia_habilitadora"] = ""
     df_merged["area_aplicacao"] = ""
     df_merged["missoes"] = ""
+    df_merged["amazonia"] = ""
+    df_merged["descarbonizacao"] = ""
 
 
     #remover colunas
@@ -105,6 +107,8 @@ def new_classificacao_projeto():
         'Valor aportado EMBRAPII': 'Valor aportado EMBRAPII',
         'Valor aportado Empresa': 'Valor aportado Empresa',
         'Valor aportado Unidade': 'Valor aportado pela Unidade',
+        'amazonia': 'Amazônia',
+        'descarbonizacao': 'Descarbonização'
     })
 
     # Ordem das colunas conforme a lista fornecida
@@ -122,6 +126,8 @@ def new_classificacao_projeto():
         'Tecnologias Habilitadoras',
         'Áreas de Aplicação',
         'Missões - CNDI final',
+        'Amazônia',
+        'Descarbonização',
         'Projeto',
         'Título público',
         'Objetivo',

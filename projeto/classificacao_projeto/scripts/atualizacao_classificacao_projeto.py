@@ -18,45 +18,65 @@ def atualizacao_classificao_projeto():
     df_atual = pd.read_excel(caminho_atual, sheet_name='Planilha1')
     df_new = pd.read_excel(caminho_new)
 
-    # Identificar novos registros
-    novos_registros = df_new[~df_new['Código'].isin(df_atual['Código'])]
+    # Merge
+    classificacoes = ['Tecnologias Habilitadoras', 'Áreas de Aplicação', 'Missões - CNDI final', 'Amazônia', 'Descarbonização']
+    classificacoes_com_codigo = classificacoes + ['Código']
+    df_merge = df_new.merge(df_atual[classificacoes_com_codigo], on='Código', how='left')
 
-    # Adicionar colunas com valor "Não definido" para os novos registros
-    novos_registros['Tecnologias Habilitadoras'] = "Não definido"
-    novos_registros['Áreas de Aplicação'] = "Não definido"
-    novos_registros['Missões - CNDI final'] = "Não definido"
-    novos_registros['Amazônia'] = "Não definido"
-    novos_registros['Descarbonização'] = "Não definido"
-    # novos_registros = novos_registros.drop('Pedidos de Propriedade Intelectual', axis=1)
+    # Colocar não definido registros vazios
+    df_merge[classificacoes] = df_merge[classificacoes].fillna('Não definido')
 
+    # Ordenando as colunas
+    colunas_ordenadas = [
+        'Código',
+        'Unidade EMBRAPII',
+        'Empresas',
+        'Porte da Empresa',
+        'Número de Empresas no Projeto',
+        'Agrupamento Div CNAE',
+        'CNAE Divisão',
+        'Nomenclatura CNAE Divisão',
+        'Grande Área de Competência',
+        'Competência UE',
+        'Tecnologias Habilitadoras',
+        'Áreas de Aplicação',
+        'Missões - CNDI final',
+        'Amazônia',
+        'Descarbonização',
+        'Projeto',
+        'Título público',
+        'Objetivo',
+        'Descrição pública',
+        'Tipo de projeto',
+        'Call',
+        'Data do contrato',
+        'Nível de maturidade inicial',
+        'Nível de maturidade final',
+        'Valor total',
+        'Valor aportado EMBRAPII',
+        'Valor aportado Empresa',
+        'Valor aportado pela Unidade',
+    ]
 
-    # Carregar a planilha atual com openpyxl
-    wb = openpyxl.load_workbook(caminho_atual)
-    ws = wb['Planilha1']
-
-    # Adicionar novos registros ao final da planilha atual
-    for _, row in novos_registros.iterrows():
-        ws.append(list(row))
-
-    # Salvar a nova planilha temporariamente para manipulação com pandas
-    caminho_temp = os.path.join(ROOT, 'projeto', 'classificacao_projeto', 'temp_classificacao_projeto.xlsx')
-    wb.save(caminho_temp)
-
-    # Recarregar a planilha temporária com pandas para reordenar
-    df_final = pd.read_excel(caminho_temp, sheet_name='Planilha1')
+    df_merge = df_merge[colunas_ordenadas]
 
     # Criar colunas auxiliares para priorizar "Não definido"
-    df_final['Tecnologias Habilitadoras Prioridade'] = df_final['Tecnologias Habilitadoras'].apply(lambda x: 0 if x == "Não definido" else 1)
-    df_final['Áreas de Aplicação Prioridade'] = df_final['Áreas de Aplicação'].apply(lambda x: 0 if x == "Não definido" else 1)
+    clas_prioridade = ['THP', 'APP', 'MCP', 'AP', 'DP']
+    
+    # Itera sobre as colunas de classificações e classificações de prioridade ao mesmo tempo
+    for class_col, priority_col in zip(classificacoes, clas_prioridade):
+        df_merge[priority_col] = df_merge[class_col].apply(lambda x: 0 if x == "Não definido" else 1)
+
+
 
     # Ordenar priorizando "Não definido"
-    df_final_sorted = df_final.sort_values(by=['Tecnologias Habilitadoras Prioridade', 'Áreas de Aplicação Prioridade', 'Tecnologias Habilitadoras', 'Áreas de Aplicação'])
+    df_final = df_merge.sort_values(by=clas_prioridade)
 
     # Remover colunas auxiliares
-    df_final_sorted = df_final_sorted.drop(columns=['Tecnologias Habilitadoras Prioridade', 'Áreas de Aplicação Prioridade'])
+    df_final = df_final.drop(columns=clas_prioridade)
 
     # Salvar a planilha reordenada no caminho de destino
-    df_final_sorted.to_excel(caminho_destino, index=False, sheet_name='Planilha1')
+    df_final.to_excel(caminho_destino, index=False, sheet_name='Planilha1')
 
     # Ajustar as larguras das colunas
     wb_final = openpyxl.load_workbook(caminho_destino)
@@ -68,7 +88,3 @@ def atualizacao_classificao_projeto():
         ws_final.column_dimensions[col_letter].width = max_length
 
     wb_final.save(caminho_destino)
-
-    # Remover o arquivo temporário
-    os.remove(caminho_temp)
-

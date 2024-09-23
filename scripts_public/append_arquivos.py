@@ -64,10 +64,5 @@ def append_excel_files(diretorio, nome_arquivo):
         final_df.to_excel(output_file, index=False)
 
     # Apaga a pasta data_temp e todo o seu conteúdo
-    def on_rm_error(func, path, exc_info):
-    # Define as permissões para permitir a exclusão
-        os.chmod(path, stat.S_IWRITE)
-        func(path)
-
-    shutil.rmtree(data_temp_folder, onerror=on_rm_error)
+    shutil.rmtree(data_temp_folder)
 

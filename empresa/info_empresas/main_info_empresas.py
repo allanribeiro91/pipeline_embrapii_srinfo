@@ -46,30 +46,30 @@ def main_info_empresas_processar():
 
 def agregar_dados_porte_empresa():
     path_empresas = os.path.join(ROOT, 'empresa', 'info_empresas', 'step_3_data_processed', 'info_empresas.xlsx')
-    path_porte = os.path.join(ROOT, 'empresa', 'info_empresas', 'step_2_stage_area', 'empresas_porte.xlsx')
+    path_porte = os.path.join(ROOT, 'projeto', 'projetos_empresas', 'step_3_data_processed', 'informacoes_empresas.xlsx')
 
     df_empresas = pd.read_excel(path_empresas)
     df_porte = pd.read_excel(path_porte)
-    colunas_remover = [
-        'Código',
-        'CNAE',
-        'Empresas',
-        'CNAE_parte',
-        'cnae_divisao',
-    ]
-    df_porte = df_porte.drop(columns=colunas_remover)
+    # colunas_remover = [
+    #     'Código',
+    #     'CNAE',
+    #     'Empresas',
+    #     'CNAE_parte',
+    #     'cnae_divisao',
+    # ]
+    # df_porte = df_porte.drop(columns=colunas_remover)
 
-    df_empresas = df_empresas.merge(df_porte, left_on='cnpj', right_on='CNPJ', how='left')
-    colunas_remover = [
-        'CNPJ',
-    ]
-    df_empresas = df_empresas.drop(columns=colunas_remover)
+    # df_empresas = df_empresas.merge(df_porte, left_on='cnpj', right_on='CNPJ', how='left')
+    # colunas_remover = [
+    #     'CNPJ',
+    # ]
+    # df_empresas = df_empresas.drop(columns=colunas_remover)
 
-    novos_nomes = {
-        'Faixa de faturamento declarada':'faixa_faturamento',
-        'Faixa de empregados declarada':'faixa_empregados',
-    }
-    df_empresas = df_empresas.rename(columns=novos_nomes)
+    # novos_nomes = {
+    #     'Faixa de faturamento declarada':'faixa_faturamento',
+    #     'Faixa de empregados declarada':'faixa_empregados',
+    # }
+    # df_empresas = df_empresas.rename(columns=novos_nomes)
 
     df_empresas = df_empresas.drop_duplicates(subset='cnpj')
 

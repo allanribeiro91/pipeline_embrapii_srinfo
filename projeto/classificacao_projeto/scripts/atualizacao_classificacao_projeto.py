@@ -41,9 +41,6 @@ def atualizacao_classificao_projeto():
         'Tecnologias Habilitadoras',
         'Áreas de Aplicação',
         'Missões - CNDI final',
-        'Amazônia',
-        'Descarbonização',
-        'Brasil Mais Produtivo',
         'Projeto',
         'Título público',
         'Objetivo',
@@ -57,6 +54,9 @@ def atualizacao_classificao_projeto():
         'Valor aportado EMBRAPII',
         'Valor aportado Empresa',
         'Valor aportado pela Unidade',
+        'Amazônia',
+        'Descarbonização',
+        'Brasil Mais Produtivo',
     ]
 
     df_merge = df_merge[colunas_ordenadas]

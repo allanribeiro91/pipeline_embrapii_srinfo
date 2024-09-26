@@ -57,8 +57,6 @@ def criar_tabela_portfolio():
         "Tecnologias Habilitadoras",
         "Áreas de Aplicação",
         "Missões - CNDI final",
-        "Amazônia",
-        "Descarbonização",
         "Brasil Mais Produtivo",
     ]
     df_classificacao_projeto_selecionado = df_classificacao_projeto[colunas_classificacao_projeto]
@@ -76,8 +74,6 @@ def criar_tabela_portfolio():
         'Tecnologias Habilitadoras': 'tecnologia_habilitadora',
         'Áreas de Aplicação': 'area_aplicacao',
         'Missões - CNDI final': 'missoes_cndi',
-        'Amazônia': 'amazonia',
-        'Descarbonização': 'descarbonizacao',
         'Brasil Mais Produtivo': 'brasil_mais_produtivo'
     })
 
@@ -99,9 +95,6 @@ def criar_tabela_portfolio():
         "tecnologia_habilitadora",
         "missoes_cndi",
         "area_aplicacao",
-        "amazonia",
-        "descarbonizacao",
-        "brasil_mais_produtivo",
         "projeto",
         "trl_inicial",
         "trl_final",
@@ -117,6 +110,7 @@ def criar_tabela_portfolio():
         "observacoes",
         "tags",
         "data_extracao_dados",
+        "brasil_mais_produtivo",
     ]
     df_portfolio = df_portfolio[colunas_finais]
 

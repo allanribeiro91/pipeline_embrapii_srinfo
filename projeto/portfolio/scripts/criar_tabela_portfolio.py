@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 from datetime import datetime
+import numpy as np
 
 def criar_tabela_portfolio():
     # Caminhos dos arquivos Excel
@@ -23,15 +24,18 @@ def criar_tabela_portfolio():
     df_sebrae_srinfo = pd.read_excel(raw_sebrae_srinfo_path)
 
     # Escolher somente colunas desejadas sebrae
-    df_sebrae = df_sebrae[['Código', 'Valor aportado SEBRAE']]
-    df_sebrae = df_sebrae.rename(columns={'Valor aportado SEBRAE': 'valor_sebrae'})
+    df_sebrae = df_sebrae[['Código', 'Valor aportado SEBRAE', 'Valor aportado Empresa (SEBRAE)', 'Valor aportado pela Unidade', 'Valor aportado EMBRAPII']]
+    df_sebrae = df_sebrae.rename(columns={'Valor aportado SEBRAE': 'valor_sebrae',
+                                          'Valor aportado Empresa (SEBRAE)': 'valor_empresa',
+                                          'Valor aportado pela Unidade': 'valor_unidade_embrapii',
+                                          'Valor aportado EMBRAPII': 'valor_embrapii'})
 
 
     # juntar negociacao com valores sebrae para os que não estão na base do nicolas
     df_subset = df_relatorio_projetos_contratados[df_relatorio_projetos_contratados['Parcerias'].str.contains('SEBRAE', case=False, na=False)]
     df_comparacao = df_subset[~df_subset['Código'].isin(df_sebrae['Código'])]
     df_merge = df_comparacao.merge(df_sebrae_srinfo, left_on = 'Negociação', right_on = 'codigo_negociacao', how = 'left')
-    df_final = df_merge[['Código', 'valor_sebrae']]
+    df_final = df_merge[['Código', 'valor_sebrae', 'valor_empresa', 'valor_unidade_embrapii', 'valor_embrapii']]
     df_combinado = pd.concat([df_sebrae, df_final])
 
     # Selecionar apenas as colunas de interesse
@@ -96,6 +100,23 @@ def criar_tabela_portfolio():
         'Brasil Mais Produtivo': 'brasil_mais_produtivo'
     })
 
+    df_portfolio['valor_empresa'] = np.where(
+        df_portfolio['valor_empresa_y'].isna(), 
+        df_portfolio['valor_empresa_x'], 
+        df_portfolio['valor_empresa_y']
+    )
+
+    df_portfolio['valor_unidade_embrapii'] = np.where(
+        df_portfolio['valor_unidade_embrapii_y'].isna(), 
+        df_portfolio['valor_unidade_embrapii_x'], 
+        df_portfolio['valor_unidade_embrapii_y']
+    )
+
+    df_portfolio['valor_embrapii'] = np.where(
+        df_portfolio['valor_embrapii_y'].isna(), 
+        df_portfolio['valor_embrapii_x'], 
+        df_portfolio['valor_embrapii_y']
+    )
 
     # Reordenar as colunas conforme especificado
     colunas_finais = [
@@ -154,8 +175,6 @@ def criar_tabela_portfolio():
 
     for campo in campos_valores:
         df_portfolio[campo] = df_portfolio[campo].apply(pd.to_numeric, errors='coerce').fillna(0)
-
-    df_portfolio['valor_empresa'] = df_portfolio['valor_empresa'] - df_portfolio['valor_sebrae']
 
     # Garantir que o diretório de destino existe
     os.makedirs(destino, exist_ok=True)

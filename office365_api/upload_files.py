@@ -13,12 +13,12 @@ sys.path.append(PATH_OFFICE)
 
 from office365_api.office365_api import SharePoint
 
-def upload_files(pasta_arquivos, destino, keyword=None):
+def upload_files(pasta_arquivos, destino, sharepoint_site, sharepoint_site_name, sharepoint_doc, keyword=None):
     file_list = get_list_of_files(pasta_arquivos)
     for file in file_list:
         if keyword is None or keyword == 'None' or re.search(keyword, file[0]):
             file_content = get_file_content(file[1])
-            SharePoint().upload_file(file[0], destino, file_content)
+            SharePoint().upload_file(destino, sharepoint_site, sharepoint_site_name, sharepoint_doc, file[0], file_content)
 
 def get_list_of_files(folder):
     file_list = []

@@ -26,6 +26,7 @@ from projeto.projetos_empresas.main_projetos_empresas import main_projetos_empre
 from projeto.estudantes.main_estudantes import main_estudantes
 from projeto.pedidos_pi.main_pedidos_pi import main_pedidos_pi
 from projeto.macroentregas.main_macroentregas import main_macroentregas
+from projeto.sebrae.main_sebrae import main_sebrae
 from projeto.classificacao_projeto.main_classificacao_projeto import main_classificacao_projeto
 from projeto.portfolio.main_portfolio import main_portfolio
 from scripts_public.registrar_log import registrar_log
@@ -82,6 +83,9 @@ def main_pipeline_srinfo():
 
     main_macroentregas(driver)
     log = logear(log, 'macroentregas')
+
+    main_sebrae(driver)
+    log = logear(log, 'sebrae')
 
     encerrar_webdriver(driver)
 

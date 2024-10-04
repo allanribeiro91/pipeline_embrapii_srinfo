@@ -57,6 +57,7 @@ def baixar_dados_srinfo(driver, link_listagem):
         driver.get(link_listagem)
         
         #Selecionar "9999" no dropdown
+        time.sleep(5)
         dropdown = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.CLASS_NAME, 'form-control.input-sm'))
         )

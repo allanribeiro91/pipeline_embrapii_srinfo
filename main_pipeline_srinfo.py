@@ -43,7 +43,7 @@ def main_pipeline_srinfo():
     log = []
 
     #SharePoint
-    buscar_arquivos_sharepoint()
+    # buscar_arquivos_sharepoint()
 
     # Configurar o WebDriver
     driver = configurar_webdriver()

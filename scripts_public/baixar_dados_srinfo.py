@@ -11,7 +11,7 @@ from selenium.webdriver.edge.service import Service as EdgeService
 # Carregar variáveis de ambiente do arquivo .env
 load_dotenv()
 
-def baixar_dados_srinfo(driver, link_listagem):
+def baixar_dados_srinfo(driver, link_listagem, num_pages = None):
 
     username = os.getenv('USERNAME')
     password = os.getenv('PASSWORD')
@@ -57,8 +57,8 @@ def baixar_dados_srinfo(driver, link_listagem):
         driver.get(link_listagem)
         
         #Selecionar "9999" no dropdown
-        time.sleep(5)
-        dropdown = WebDriverWait(driver, 10).until(
+        time.sleep(7)
+        dropdown = WebDriverWait(driver, 15).until(
             EC.element_to_be_clickable((By.CLASS_NAME, 'form-control.input-sm'))
         )
         dropdown.click()
@@ -73,7 +73,11 @@ def baixar_dados_srinfo(driver, link_listagem):
         #Descobrir o número de páginas
         time.sleep(3)
         pagination = driver.find_elements(By.CSS_SELECTOR, 'ul.pagination li')
-        num_pages = len(pagination) - 2
+
+        if num_pages == None:
+            num_pages = len(pagination) - 2
+        else:
+            num_pages
 
         #Se houver mais de uma página, repetir para as páginas seguintes
         if num_pages > 1:

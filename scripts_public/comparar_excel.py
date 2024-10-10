@@ -15,13 +15,15 @@ def comparar_excel():
     DWPII_UP = os.path.abspath(os.path.join(ROOT, 'DWPII_up'))
 
     # Leitura das planilhas
-    copy = pd.read_excel(os.path.abspath(os.path.join(DWPII_COPY, "projetos_empresas.xlsx")))
-    up = pd.read_excel(os.path.abspath(os.path.join(DWPII_UP, "projetos_empresas.xlsx")))
+    copy_projetos = pd.read_excel(os.path.abspath(os.path.join(DWPII_COPY, "portfolio.xlsx")))
+    copy_empresas = pd.read_excel(os.path.abspath(os.path.join(DWPII_COPY, "informacoes_empresas.xlsx")))
+    up_projetos = pd.read_excel(os.path.abspath(os.path.join(DWPII_UP, "portfolio.xlsx")))
+    up_empresas = pd.read_excel(os.path.abspath(os.path.join(DWPII_UP, "informacoes_empresas.xlsx")))
     classif = pd.read_excel(os.path.abspath(os.path.join(DWPII_UP, "classificacao_projeto.xlsx")))
 
     # Calculando numero de novos projetos, novas empresas e numero de projetos sem classificacao 
-    proj = len(up[~up['codigo_projeto'].isin(copy['codigo_projeto'])])
-    emp = len(up[~up['cnpj'].isin(copy['cnpj'])])
+    proj = len(up_projetos[~up_projetos['codigo_projeto'].isin(copy_projetos['codigo_projeto'])])
+    emp = len(up_empresas[~up_empresas['cnpj'].isin(copy_empresas['cnpj'])])
     clas = len(classif[classif['Tecnologias Habilitadoras'] == 'Não definido'])
 
     return [proj, emp, clas]

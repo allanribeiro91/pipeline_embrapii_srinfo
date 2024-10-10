@@ -20,6 +20,9 @@ from upload_files import upload_files
 # Definir caminhos
 SNAPSHOT_FOLDER = os.path.abspath(os.path.join(ROOT, 'report_snapshot'))
 SNAPSHOT_FILE = os.path.abspath(os.path.join(SNAPSHOT_FOLDER, 'report_snapshot_embrapii.xlsx'))
+SHAREPOINT_SITE = os.getenv('sharepoint_url_site')
+SHAREPOINT_SITE_NAME = os.getenv('sharepoint_site_name')
+SHAREPOINT_DOC = os.getenv('sharepoint_doc_library')
 
 def gerar_report_snapshot():
     # Inicializar o Excel
@@ -53,4 +56,4 @@ def gerar_report_snapshot():
 
 
 def levar_relatorio_snapshot():
-    upload_files(SNAPSHOT_FOLDER, "Reports")
+    upload_files(SNAPSHOT_FOLDER, "Reports", SHAREPOINT_SITE, SHAREPOINT_SITE_NAME, SHAREPOINT_DOC)

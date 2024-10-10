@@ -25,7 +25,10 @@ from criar_tabela_portfolio import criar_tabela_portfolio
 origens = {
     'contratos': os.path.join(ROOT, 'projeto', 'contratos', 'step_3_data_processed', 'contratos.xlsx'),
     'projetos': os.path.join(ROOT, 'projeto', 'projetos', 'step_3_data_processed', 'projetos.xlsx'),
-    'classificacao_projeto': os.path.join(ROOT, 'projeto', 'classificacao_projeto', 'step_3_data_processed', 'classificacao_projeto.xlsx')
+    'classificacao_projeto': os.path.join(ROOT, 'projeto', 'classificacao_projeto', 'step_3_data_processed', 'classificacao_projeto.xlsx'),
+    'negociacao': os.path.join(ROOT, 'analises_relatorios', 'projetos_contratados', 'step_1_data_raw', 'raw_relatorio_projetos_contratados_1.xlsx'),
+    'sebrae_srinfo': os.path.join(ROOT, 'projeto', 'sebrae', 'step_3_data_processed', 'sebrae_srinfo.xlsx'),
+    'sebrae': os.path.join(ROOT, 'DWPII_copy', 'sebrae_bi_interno_base_2.0.xlsx')
 }
 
 # Define o caminho relativo da pasta de destino
@@ -35,7 +38,10 @@ destino = os.path.join(CURRENT_DIR, 'step_1_data_raw')
 renomeios = {
     'contratos': 'raw_contratos.xlsx',
     'projetos': 'raw_projetos.xlsx',
-    'classificacao_projeto': 'raw_classificacao_projeto.xlsx'
+    'classificacao_projeto': 'raw_classificacao_projeto.xlsx',
+    'negociacao': 'raw_relatorio_projetos_contratados_1.xlsx',
+    'sebrae_srinfo': 'raw_sebrae_srinfo.xlsx',
+    'sebrae': 'raw_sebrae.xlsx'
 }
 
 def main_portfolio():

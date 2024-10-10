@@ -32,6 +32,9 @@ from projeto.portfolio.main_portfolio import main_portfolio
 from prospeccao.comunicacao.main_comunicacao import main_comunicacao
 from prospeccao.eventos_srinfo.main_eventos_srinfo import main_eventos_srinfo
 from prospeccao.prospeccao.main_prospeccao import main_prospeccao
+from negociacoes.negociacoes.main_negociacoes import main_negociacoes
+from negociacoes.planos_trabalho.main_planos_trabalho import main_planos_trabalho
+from negociacoes.propostas_tecnicas.main_propostas_tecnicas import main_propostas_tecnicas
 from scripts_public.registrar_log import registrar_log
 from scripts_public.levar_arquivos_sharepoint import levar_arquivos_sharepoint
 from scripts_public.comparar_excel import comparar_excel
@@ -99,12 +102,22 @@ def main_pipeline_srinfo():
     main_prospeccao(driver)
     log = logear(log, 'prospeccao')
 
+    main_negociacoes(driver)
+    log = logear(log, 'negociacoes')
+
+    main_propostas_tecnicas(driver)
+    log = logear(log, 'propostas_tecnicas')
+
+    main_planos_trabalho(driver)
+    log = logear(log, 'planos_trabalho')
+
     encerrar_webdriver(driver)
 
     main_classificacao_projeto()
     log = logear(log, 'classificacao_projetos')
 
     main_info_empresas_processar()
+    log = logear(log, 'info_empresas')
 
     main_portfolio()
     log = logear(log, 'portfolio')

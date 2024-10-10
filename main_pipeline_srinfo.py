@@ -29,6 +29,9 @@ from projeto.macroentregas.main_macroentregas import main_macroentregas
 from projeto.sebrae.main_sebrae import main_sebrae
 from projeto.classificacao_projeto.main_classificacao_projeto import main_classificacao_projeto
 from projeto.portfolio.main_portfolio import main_portfolio
+from prospeccao.comunicacao.main_comunicacao import main_comunicacao
+from prospeccao.eventos_srinfo.main_eventos_srinfo import main_eventos_srinfo
+from prospeccao.prospeccao.main_prospeccao import main_prospeccao
 from scripts_public.registrar_log import registrar_log
 from scripts_public.levar_arquivos_sharepoint import levar_arquivos_sharepoint
 from scripts_public.comparar_excel import comparar_excel
@@ -49,10 +52,10 @@ def main_pipeline_srinfo():
     driver = configurar_webdriver()
 
     #Empresas
-    main_info_empresas_baixar(driver)
+    # main_info_empresas_baixar(driver)
     log = logear(log, 'info_empresas')
 
-    main_empresas_contratantes(driver)
+    # main_empresas_contratantes(driver)
     log = logear(log, 'empresas_contratantes')
 
     #Unidades Embrapii
@@ -86,6 +89,15 @@ def main_pipeline_srinfo():
 
     main_sebrae(driver)
     log = logear(log, 'sebrae')
+
+    main_comunicacao(driver)
+    log = logear(log, 'comunicacao')
+
+    main_eventos_srinfo(driver)
+    log = logear(log, 'eventos_srinfo')
+
+    main_prospeccao(driver)
+    log = logear(log, 'prospeccao')
 
     encerrar_webdriver(driver)
 

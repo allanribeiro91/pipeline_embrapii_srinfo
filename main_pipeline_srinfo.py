@@ -55,10 +55,10 @@ def main_pipeline_srinfo():
     driver = configurar_webdriver()
 
     #Empresas
-    # main_info_empresas_baixar(driver)
+    main_info_empresas_baixar(driver)
     log = logear(log, 'info_empresas')
 
-    # main_empresas_contratantes(driver)
+    main_empresas_contratantes(driver)
     log = logear(log, 'empresas_contratantes')
 
     #Unidades Embrapii

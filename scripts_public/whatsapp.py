@@ -8,7 +8,7 @@ import pyautogui
 def enviar_whatsapp(mensagem):
     try:
         # whatsapp = f'https://web.whatsapp.com/send?phone={telefone}&text={quote(mensagem)}'
-        grupo = 'GED Embrapii'
+        grupo = 'GPE Embrapii'
         whatsapp = f'https://web.whatsapp.com/send?text={quote(mensagem)}&app_absent=0&selectedContactName={quote(grupo)}'
         webbrowser.open(whatsapp)
         sleep(50)

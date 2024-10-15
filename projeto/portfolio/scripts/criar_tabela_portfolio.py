@@ -83,9 +83,16 @@ def criar_tabela_portfolio():
     ]
     df_classificacao_projeto_selecionado = df_classificacao_projeto[colunas_classificacao_projeto]
 
+    colunas_projetos_contratados = [
+        "Código",
+        "Negociação",
+    ]
+    df_relatorio_projetos_contratados = df_relatorio_projetos_contratados[colunas_projetos_contratados]
+
     # Mesclar os dados com base na chave "codigo_projeto"
     df_portfolio = df_contratos_selecionado.merge(df_projetos_selecionado, on='codigo_projeto', how='left')
     df_portfolio = df_portfolio.merge(df_classificacao_projeto_selecionado, left_on='codigo_projeto', right_on='Código', how='left')
+    df_portfolio = df_portfolio.merge(df_relatorio_projetos_contratados, left_on = 'codigo_projeto', right_on = 'Código', how = 'left')
     # df_portfolio = df_portfolio.merge(df_projetos_contratados_selecionados, on='codigo_projeto', how='left')
     df_portfolio = df_portfolio.merge(df_combinado, left_on = 'codigo_projeto', right_on = 'Código', how = 'left')
     df_portfolio = df_portfolio.drop_duplicates(subset='codigo_projeto', keep='first')
@@ -97,7 +104,9 @@ def criar_tabela_portfolio():
         'Tecnologias Habilitadoras': 'tecnologia_habilitadora',
         'Áreas de Aplicação': 'area_aplicacao',
         'Missões - CNDI final': 'missoes_cndi',
-        'Brasil Mais Produtivo': 'brasil_mais_produtivo'
+        'Brasil Mais Produtivo': 'brasil_mais_produtivo',
+        'codigo_negociacao': 'cn',
+        'Negociação': 'codigo_negociacao',
     })
 
     df_portfolio['valor_empresa'] = np.where(

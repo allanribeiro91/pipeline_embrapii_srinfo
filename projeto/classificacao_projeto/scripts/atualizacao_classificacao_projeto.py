@@ -19,7 +19,7 @@ def atualizacao_classificao_projeto():
     df_new = pd.read_excel(caminho_new)
 
     # Merge
-    classificacoes = ['Tecnologias Habilitadoras', 'Áreas de Aplicação', 'Missões - CNDI final', 'Amazônia', 'Descarbonização', 'Brasil Mais Produtivo']
+    classificacoes = ['Tecnologias Habilitadoras', 'Áreas de Aplicação', 'Missões - CNDI final', 'Amazônia', 'Descarbonização', 'Brasil Mais Produtivo', 'Biocombustíveis']
     classificacoes_com_codigo = classificacoes + ['Código']
     df_merge = df_new.merge(df_atual[classificacoes_com_codigo], on='Código', how='left')
 
@@ -57,12 +57,13 @@ def atualizacao_classificao_projeto():
         'Amazônia',
         'Descarbonização',
         'Brasil Mais Produtivo',
+        'Biocombustíveis'
     ]
 
     df_merge = df_merge[colunas_ordenadas]
 
     # Criar colunas auxiliares para priorizar "Não definido"
-    clas_prioridade = ['THP', 'APP', 'MCP', 'AP', 'DP', 'BMP']
+    clas_prioridade = ['THP', 'APP', 'MCP', 'AP', 'DP', 'BMP', 'BIOP']
     
     # Itera sobre as colunas de classificações e classificações de prioridade ao mesmo tempo
     for class_col, priority_col in zip(classificacoes, clas_prioridade):

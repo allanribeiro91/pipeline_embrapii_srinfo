@@ -1,5 +1,6 @@
 import os
 import sys
+import pandas as pd
 from dotenv import load_dotenv
 
 #carregar .env
@@ -47,7 +48,6 @@ campos_interesse = [
     "Data da primeira versão",
     "Código da Negociação",
     "CNPJ",
-    "Empresa(s)",
     "Objetivos",
     "Versão",
 ]
@@ -57,7 +57,6 @@ novos_nomes_e_ordem = {
     "Unidade EMBRAPII": 'unidade_embrapii',
     "Data da primeira versão": 'data_prim_ver',
     "CNPJ": 'cnpj',
-    "Empresa(s)": 'empresa',
     "Objetivos": 'objetivos',
     "Versão": 'versao', 
 }
@@ -67,3 +66,21 @@ campos_data = ['data_prim_ver']
 
 def processar_dados():
     processar_excel(arquivo_origem, campos_interesse, novos_nomes_e_ordem, arquivo_destino, campos_data)
+
+     # Criando propostas técnicas empresas
+    prop = pd.read_excel(arquivo_destino)
+    prop['cnpj'] = prop['cnpj'].fillna('').astype(str)
+    empresas = prop
+
+    empresas['cnpj'] = empresas['cnpj'].str.split(';')
+    empresas = empresas.explode('cnpj')
+    empresas['cnpj'] = empresas['cnpj'].str.strip()
+    empresas = empresas[~empresas[['cnpj']].eq('').any(axis=1)]
+    empresas = empresas[['codigo_negociacao', 'cnpj']]
+    empresas = empresas.drop_duplicates()
+
+    prop = prop.drop(['cnpj'], axis=1)
+    prop = prop.drop_duplicates()
+
+    prop.to_excel(arquivo_destino, index = False)
+    empresas.to_excel(os.path.join(destino, 'propostas_tecnicas_empresas.xlsx'), index = False)

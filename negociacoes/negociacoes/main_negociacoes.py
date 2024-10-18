@@ -1,5 +1,6 @@
 import os
 import sys
+import pandas as pd
 from dotenv import load_dotenv
 
 #carregar .env
@@ -45,9 +46,7 @@ arquivo_destino = os.path.join(destino, nome_arquivo)
 campos_interesse = [
     "Código da Negociação",
     "Unidade EMBRAPII",
-    "Empresa(s)",
     "CNPJ",
-    "CNAE",
     "Parceria / Programa",
     "Call",
     "Cooperação Internacional",
@@ -66,9 +65,7 @@ campos_interesse = [
 novos_nomes_e_ordem = {
     "Código da Negociação": 'codigo_negociacao',
     "Unidade EMBRAPII": 'unidade_embrapii',
-    "Empresa(s)": 'empresa',
     "CNPJ": 'cnpj',
-    "CNAE": 'cnae',
     "Parceria / Programa": 'parceria_programa',
     "Call": 'call',
     "Cooperação Internacional": 'cooperacao_internacional',
@@ -90,3 +87,24 @@ campos_valor = ['valor_total_plano_trabalho']
 
 def processar_dados():
     processar_excel(arquivo_origem, campos_interesse, novos_nomes_e_ordem, arquivo_destino, campos_data, campos_valor)
+
+    # Criando negociações empresas
+    negociacoes = pd.read_excel(arquivo_destino)
+    negociacoes['cnpj'] = negociacoes['cnpj'].fillna('').astype(str)
+    empresas = negociacoes
+
+    empresas['cnpj'] = empresas['cnpj'].str.split(';')
+    empresas = empresas.explode('cnpj')
+    empresas['cnpj'] = empresas['cnpj'].str.strip()
+    empresas = empresas[~empresas[['cnpj']].eq('').any(axis=1)]
+    empresas = empresas[['codigo_negociacao', 'cnpj']]
+    empresas = empresas.drop_duplicates()
+
+    negociacoes['parceria_programa'] = negociacoes['parceria_programa'].str.replace(r';$', '', regex=True)
+    negociacoes['call'] = negociacoes['call'].str.replace(r';$', '', regex=True)
+    negociacoes['modalidade_financiamento'] = negociacoes['modalidade_financiamento'].str.replace(r';$', '', regex=True)
+    negociacoes = negociacoes.drop(['cnpj'], axis=1)
+    negociacoes = negociacoes.drop_duplicates()
+
+    negociacoes.to_excel(arquivo_destino, index = False)
+    empresas.to_excel(os.path.join(destino, 'negociacoes_empresas.xlsx'), index = False)

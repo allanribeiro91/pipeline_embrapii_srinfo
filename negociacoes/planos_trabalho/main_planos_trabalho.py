@@ -1,5 +1,6 @@
 import os
 import sys
+import pandas as pd
 from dotenv import load_dotenv
 
 #carregar .env
@@ -46,7 +47,6 @@ campos_interesse = [
     "Unidade EMBRAPII",
     "Data de entrega",
     "Código da Negociação",
-    "Empresa(s)",
     "CNPJ",
     "Objetivos",
     "Valor total",
@@ -58,7 +58,6 @@ novos_nomes_e_ordem = {
     "Código da Negociação": 'codigo_negociacao',
     "Unidade EMBRAPII": 'unidade_embrapii',
     "Data de entrega": 'data_entrega',
-    "Empresa(s)": 'empresa',
     "CNPJ": 'cnpj',
     "Objetivos": 'objetivos',
     "Valor total": 'valor_total',
@@ -72,3 +71,21 @@ campos_valor = ['valor_total']
 
 def processar_dados():
     processar_excel(arquivo_origem, campos_interesse, novos_nomes_e_ordem, arquivo_destino, campos_data, campos_valor)
+
+     # Criando planos de trabalho empresas
+    planos_trabalho = pd.read_excel(arquivo_destino)
+    planos_trabalho['cnpj'] = planos_trabalho['cnpj'].fillna('').astype(str)
+    empresas = planos_trabalho
+
+    empresas['cnpj'] = empresas['cnpj'].str.split(';')
+    empresas = empresas.explode('cnpj')
+    empresas['cnpj'] = empresas['cnpj'].str.strip()
+    empresas = empresas[~empresas[['cnpj']].eq('').any(axis=1)]
+    empresas = empresas[['codigo_negociacao', 'cnpj']]
+    empresas = empresas.drop_duplicates()
+
+    planos_trabalho = planos_trabalho.drop(['cnpj'], axis=1)
+    planos_trabalho = planos_trabalho.drop_duplicates()
+
+    planos_trabalho.to_excel(arquivo_destino, index = False)
+    empresas.to_excel(os.path.join(destino, 'planos_trabalho_empresas.xlsx'), index = False)

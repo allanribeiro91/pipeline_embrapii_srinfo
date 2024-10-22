@@ -78,7 +78,6 @@ novos_nomes_e_ordem = {
 campos_data = ['data_inicio_atividades', 'data_termino_atividades']
 
 def processar_dados():
-    print('Processou dados')
     processar_excel(arquivo_origem, campos_interesse, novos_nomes_e_ordem, arquivo_destino, campos_data)
 
 

@@ -42,8 +42,6 @@ def criar_tabela_ue_linhas_atuacao():
     # Salvar o arquivo resultante
     df_explodido.to_excel(arquivo_destino, index=False)
 
-    print(f"Tabela 'ue_linhas_atuacao' criada com sucesso em: {arquivo_destino}")
-
 # Exemplo de chamada da função
 if __name__ == "__main__":
     criar_tabela_ue_linhas_atuacao()

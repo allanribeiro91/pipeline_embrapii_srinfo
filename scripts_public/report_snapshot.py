@@ -36,7 +36,7 @@ def gerar_report_snapshot():
     workbook.RefreshAll()
 
     # Aguardar a conclusão da atualização (adicionar um atraso)
-    print("Aguardando a atualização das consultas...")
+    print("SNAPSHOT: aguardando a atualização das consultas...")
     time.sleep(120) 
 
     # Definir caminho para salvar o PDF

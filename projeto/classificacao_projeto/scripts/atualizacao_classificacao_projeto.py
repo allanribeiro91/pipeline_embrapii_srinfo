@@ -19,7 +19,7 @@ def atualizacao_classificao_projeto():
     df_new = pd.read_excel(caminho_new)
 
     # Merge
-    classificacoes = ['Tecnologias Habilitadoras', 'Áreas de Aplicação', 'Missões - CNDI final', 'Amazônia', 'Descarbonização', 'Brasil Mais Produtivo', 'Biocombustíveis']
+    classificacoes = ['Tecnologias Habilitadoras', 'Áreas de Aplicação', 'Missões - CNDI final', 'Amazônia', 'Descarbonização', 'Brasil Mais Produtivo', 'Biocombustíveis', 'Energia Renovável', 'NIB5_Modificado']
     classificacoes_com_codigo = classificacoes + ['Código']
     df_merge = df_new.merge(df_atual[classificacoes_com_codigo], on='Código', how='left')
 
@@ -57,7 +57,9 @@ def atualizacao_classificao_projeto():
         'Amazônia',
         'Descarbonização',
         'Brasil Mais Produtivo',
-        'Biocombustíveis'
+        'Biocombustíveis',
+        'Energia Renovável',
+        'NIB5_Modificado'
     ]
 
     df_merge = df_merge[colunas_ordenadas]

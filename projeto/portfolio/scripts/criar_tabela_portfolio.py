@@ -216,7 +216,7 @@ def criar_tabela_portfolio():
                 col_idx = df_portfolio.columns.get_loc(campo)
                 worksheet.set_column(col_idx, col_idx, 20, format_currency)
 
-    print(f"Tabela 'portfolio' criada com sucesso em: {arquivo_destino}")
+    print(f"Tabela 'portfolio' criada com sucesso!")
 
 # Exemplo de chamada da função
 if __name__ == "__main__":

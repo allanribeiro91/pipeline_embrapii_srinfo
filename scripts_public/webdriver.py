@@ -14,5 +14,7 @@ def configurar_webdriver():
     options.add_argument('start-maximized')
     options.add_argument('disable-infobars')
     options.add_argument('--disable-extensions')
+    options.add_argument('log-level=3')
+    options.add_argument('--remote-debugging-port=0')
     driver = webdriver.Edge(service=edge_service, options=options)
     return driver

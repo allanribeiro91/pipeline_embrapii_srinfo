@@ -17,8 +17,6 @@ from scripts_public.buscar_arquivos_sharepoint import buscar_arquivos_sharepoint
 from scripts_public.webdriver import configurar_webdriver
 from empresa.info_empresas.main_info_empresas import main_info_empresas_baixar, main_info_empresas_processar
 from analises_relatorios.empresas_contratantes.main_empresas_contratantes import main_empresas_contratantes
-from unidade_embrapii.info_unidades.main_info_unidades import main_info_unidades
-from unidade_embrapii.equipe_ue.main_equipe_ue import main_equipe_ue
 from analises_relatorios.projetos_contratados.main_projetos_contratados import main_projetos_contratados
 from projeto.contratos.main_contratos import main_contratos
 from projeto.projetos.main_projetos import main_projetos
@@ -35,6 +33,10 @@ from prospeccao.prospeccao.main_prospeccao import main_prospeccao
 from negociacoes.negociacoes.main_negociacoes import main_negociacoes
 from negociacoes.planos_trabalho.main_planos_trabalho import main_planos_trabalho
 from negociacoes.propostas_tecnicas.main_propostas_tecnicas import main_propostas_tecnicas
+from unidade_embrapii.info_unidades.main_info_unidades import main_info_unidades
+from unidade_embrapii.equipe_ue.main_equipe_ue import main_equipe_ue
+from unidade_embrapii.termos_cooperacao.main_termos_cooperacao import main_termos_cooperacao
+from unidade_embrapii.plano_acao.main_plano_acao import main_plano_acao
 from scripts_public.registrar_log import registrar_log
 from scripts_public.levar_arquivos_sharepoint import levar_arquivos_sharepoint
 from scripts_public.comparar_excel import comparar_excel
@@ -55,6 +57,8 @@ def main_pipeline_srinfo():
     driver = configurar_webdriver()
 
     #Empresas
+    print('SEÇÃO 1/5: COLETA DE DADOS')
+    print('Subseção: Empresas')
     main_info_empresas_baixar(driver)
     log = logear(log, 'info_empresas')
 
@@ -62,13 +66,21 @@ def main_pipeline_srinfo():
     log = logear(log, 'empresas_contratantes')
 
     #Unidades Embrapii
+    print('Subseção: Unidades Embrapii')
     main_info_unidades(driver)
     log = logear(log, 'info_unidades')
 
     main_equipe_ue(driver)
     log = logear(log, 'equipe_ue')
 
+    main_termos_cooperacao(driver)
+    log = logear(log, 'ue_termos_cooperacao')
+
+    main_plano_acao(driver)
+    log = logear(log, 'ue_termos_cooperacao')
+
     #Projetos
+    print('Subseção: Projetos')
     main_projetos_contratados(driver)
     log = logear(log, 'projetos_contratados')
 
@@ -110,9 +122,11 @@ def main_pipeline_srinfo():
 
     main_planos_trabalho(driver)
     log = logear(log, 'planos_trabalho')
-
+    
     encerrar_webdriver(driver)
 
+    #Processamento de dados
+    print('SEÇÃO 2/5: PROCESSAMENTO DE DADOS')
     main_classificacao_projeto()
     log = logear(log, 'classificacao_projetos')
 
@@ -125,12 +139,15 @@ def main_pipeline_srinfo():
     registrar_log(log)
 
     #SharePoint
+    print('SEÇÃO 3/5: LEVAR ARQUIVOS PARA O SHAREPOINT')
     levar_arquivos_sharepoint()
 
     #Report Snapshot Embrapii
+    print('SEÇÃO 4/5: GERAR SNAPSHOT')
     gerar_report_snapshot()
 
     #Calculando num de novos projetos, empresas e proj sem classificacao
+    print('SEÇÃO 5/5: ENCAMINHAR MENSAGEM')
     novos = comparar_excel()
 
     fim = datetime.now()

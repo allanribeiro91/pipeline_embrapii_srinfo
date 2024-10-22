@@ -105,6 +105,7 @@ def new_classificacao_projeto():
         'Valor aportado EMBRAPII': 'Valor aportado EMBRAPII',
         'Valor aportado Empresa': 'Valor aportado Empresa',
         'Valor aportado Unidade': 'Valor aportado pela Unidade',
+
         # 'amazonia': 'Amazônia',
         # 'descarbonizacao': 'Descarbonização'
     })

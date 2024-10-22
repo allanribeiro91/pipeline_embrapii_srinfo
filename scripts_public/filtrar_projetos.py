@@ -15,11 +15,9 @@ def filtrar_projetos(path_arquivo_a_ser_filtrado):
     
     # Carregar a lista de projetos
     lista_projetos = pd.read_excel(PATH_PROJETO)['codigo_projeto']
-    print(lista_projetos)
     
     # Filtrar os projetos que estão na lista de projetos
     arquivo_filtrado = arquivo_a_ser_filtrado[arquivo_a_ser_filtrado['codigo_projeto'].isin(lista_projetos)]
     
     # Salvar o arquivo filtrado no mesmo caminho
     arquivo_filtrado.to_excel(path_arquivo_a_ser_filtrado, index=False)
-    print("Arquivo processado e salvo com sucesso.")

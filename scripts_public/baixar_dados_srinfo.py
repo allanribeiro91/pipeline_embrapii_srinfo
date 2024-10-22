@@ -16,18 +16,7 @@ def baixar_dados_srinfo(driver, link_listagem, num_pages = None, option1000 = No
 
     username = os.getenv('USERNAME')
     password = os.getenv('PASSWORD')
-
-    # # Configurar o WebDriver usando webdriver-manager
-    # edge_service = EdgeService(EdgeChromiumDriverManager().install())
-    # options = webdriver.EdgeOptions()
-    # options.add_argument('--disable-gpu')
-    # options.add_argument('--no-sandbox')
-    # options.add_argument('start-maximized')
-    # options.add_argument('disable-infobars')
-    # options.add_argument('--disable-extensions')
-
-    # driver = webdriver.Edge(service=edge_service, options=options)
-    
+ 
     try:
         #Acessar tela de login
         driver.get('https://srinfo.embrapii.org.br/users/login/')

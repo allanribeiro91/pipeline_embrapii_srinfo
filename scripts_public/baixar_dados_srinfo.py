@@ -68,29 +68,6 @@ def baixar_dados_srinfo(driver, link_listagem, num_pages = None, option1000 = No
         carregar_dados_e_fazer_download(driver=driver)
         numero_download = 1
 
-        #Descobrir o número de páginas
-        # pagination = driver.find_elements(By.CSS_SELECTOR, 'ul.pagination li')
-
-        # if num_pages == None:
-        #     num_pages = len(pagination) - 2
-        # else:
-        #     num_pages
-
-        # print(num_pages)
-
-        # #Se houver mais de uma página, repetir para as páginas seguintes
-        # if num_pages > 1:
-
-        #     for page_number in range(num_pages):
-        #         #Clicar na página seguinte
-        #         next_page = WebDriverWait(driver, 10).until(
-        #             EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/section/div/div/div/div[2]/div/div/div[2]/div[2]/div/ul/li[7]'))
-        #         )
-        #         next_page.click()
-
-        #         carregar_dados_e_fazer_download(driver=driver)
-        #         numero_download += 1
-
         html = driver.page_source
         soup = BeautifulSoup(html, 'html.parser')
         

@@ -37,6 +37,7 @@ from unidade_embrapii.info_unidades.main_info_unidades import main_info_unidades
 from unidade_embrapii.equipe_ue.main_equipe_ue import main_equipe_ue
 from unidade_embrapii.termos_cooperacao.main_termos_cooperacao import main_termos_cooperacao
 from unidade_embrapii.plano_acao.main_plano_acao import main_plano_acao
+from unidade_embrapii.plano_metas.main_plano_metas import main_plano_metas
 from scripts_public.registrar_log import registrar_log
 from scripts_public.levar_arquivos_sharepoint import levar_arquivos_sharepoint
 from scripts_public.comparar_excel import comparar_excel
@@ -78,6 +79,9 @@ def main_pipeline_srinfo():
 
     main_plano_acao(driver)
     log = logear(log, 'ue_termos_cooperacao')
+
+    main_plano_metas(driver)
+    log = logear(log, 'ue_plano_metas')
 
     #Projetos
     print('Subseção: Projetos')
@@ -199,5 +203,11 @@ def encurtar_url(url):
     s = pyshorteners.Shortener()
     return s.tinyurl.short(url)
 
+
+def teste_pipeline():
+     # Configurar o WebDriver
+    driver = configurar_webdriver()
+    main_plano_metas(driver)
+
 if __name__ == "__main__":
-    main_pipeline_srinfo()
+    teste_pipeline()

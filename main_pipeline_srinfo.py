@@ -44,7 +44,7 @@ from scripts_public.comparar_excel import comparar_excel
 from scripts_public.whatsapp import enviar_whatsapp
 from scripts_public.report_snapshot import gerar_report_snapshot
 
-def main_pipeline_srinfo():
+def main_pipeline_srinfo(plano_metas = False, gerar_snapshot = False, enviar_wpp = False):
 
     print('Início: ', datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
     inicio = datetime.now()
@@ -80,8 +80,9 @@ def main_pipeline_srinfo():
     main_plano_acao(driver)
     log = logear(log, 'ue_termos_cooperacao')
 
-    main_plano_metas(driver)
-    log = logear(log, 'ue_plano_metas')
+    if plano_metas:
+        main_plano_metas(driver)
+        log = logear(log, 'ue_plano_metas')
 
     #Projetos
     print('Subseção: Projetos')
@@ -147,8 +148,9 @@ def main_pipeline_srinfo():
     levar_arquivos_sharepoint()
 
     #Report Snapshot Embrapii
-    print('SEÇÃO 4/5: GERAR SNAPSHOT')
-    gerar_report_snapshot()
+    if gerar_snapshot:
+        print('SEÇÃO 4/5: GERAR SNAPSHOT')
+        gerar_report_snapshot()
 
     #Calculando num de novos projetos, empresas e proj sem classificacao
     print('SEÇÃO 5/5: ENCAMINHAR MENSAGEM')
@@ -170,7 +172,9 @@ def main_pipeline_srinfo():
             f'Link para classificação dos projetos: {link}'
     )
     print(mensagem)
-    enviar_whatsapp(mensagem)
+
+    if enviar_wpp:
+        enviar_whatsapp(mensagem)
 
     print('Fim: ', datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
 
@@ -210,4 +214,4 @@ def teste_pipeline():
     main_plano_metas(driver)
 
 if __name__ == "__main__":
-    teste_pipeline()
+    main_pipeline_srinfo()

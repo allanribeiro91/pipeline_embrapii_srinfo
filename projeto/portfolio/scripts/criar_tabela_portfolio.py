@@ -86,8 +86,17 @@ def criar_tabela_portfolio():
     colunas_projetos_contratados = [
         "Código",
         "Negociação",
+        "Macroentregas",
+        "% de Aceites"
     ]
     df_relatorio_projetos_contratados = df_relatorio_projetos_contratados[colunas_projetos_contratados]
+    df_relatorio_projetos_contratados['% de Aceites'] = (
+    df_relatorio_projetos_contratados['% de Aceites']
+    .str.replace(' %', '', regex=False)  # Remove o " %"
+    .str.replace(',', '.', regex=False)  # Substitui a vírgula por ponto
+    .astype(float)  # Converte para float
+)
+    df_relatorio_projetos_contratados['% de Aceites'] = df_relatorio_projetos_contratados['% de Aceites']/100
 
     # Mesclar os dados com base na chave "codigo_projeto"
     df_portfolio = df_contratos_selecionado.merge(df_projetos_selecionado, on='codigo_projeto', how='left')
@@ -107,6 +116,8 @@ def criar_tabela_portfolio():
         'Brasil Mais Produtivo': 'brasil_mais_produtivo',
         'codigo_negociacao': 'cn',
         'Negociação': 'codigo_negociacao',
+        'Macroentregas': 'macroentregas', 
+        '% de Aceites': 'pct_aceites'
     })
 
     df_portfolio['valor_empresa'] = np.where(
@@ -161,7 +172,9 @@ def criar_tabela_portfolio():
         "data_extracao_dados",
         "brasil_mais_produtivo",
         "valor_sebrae",
-        "codigo_negociacao"
+        "codigo_negociacao",
+        "macroentregas",
+        "pct_aceites"
     ]
     df_portfolio = df_portfolio[colunas_finais]
 

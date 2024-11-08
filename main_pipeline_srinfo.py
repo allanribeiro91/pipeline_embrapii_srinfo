@@ -158,8 +158,8 @@ def main_pipeline_srinfo(plano_metas = False, gerar_snapshot = False, enviar_wpp
 
     fim = datetime.now()
     duracao = duracao_tempo(inicio, fim)
-    link = "https://embrapii.sharepoint.com/sites/GEEDD/Documentos%20Compartilhados/Forms/AllItems.aspx?id=%2Fsites%2FGEEDD%2FDocumentos%20Compartilhados%2FDWPII%2Fsrinfo&viewid=e04e1580%2D89e7%2D44c9%2D981e%2D4cb420a3a366"
-    link_snapshot = "https://embrapii.sharepoint.com/:b:/s/GEEDD/ERShw-RwRO9BimzX1_nYtREBbG0q1_DBlYmVGIPpKuXkQA?e=wAPf5B"
+    link = "https://embrapii.sharepoint.com/:x:/r/sites/GEPES/Documentos%20Compartilhados/DWPII/srinfo/classificacao_projeto.xlsx?d=wb7a7a439310f4d52a37728b9f1833961&csf=1&web=1&e=qXpfgA"
+    link_snapshot = "https://embrapii.sharepoint.com/:f:/r/sites/GEPES/Documentos%20Compartilhados/Reports?csf=1&web=1&e=aVdkyL"
     mensagem = (
             f'*Pipeline SRInfo*\n'
             f'Iniciado em: {inicio.strftime('%d/%m/%Y %H:%M:%S')}\n'

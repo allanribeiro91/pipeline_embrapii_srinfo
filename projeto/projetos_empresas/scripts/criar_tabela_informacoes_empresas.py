@@ -34,6 +34,8 @@ def criar_tabela_informacoes_empresas():
     # Ler o arquivo Excel
     df_novo = pd.read_excel(arquivo_origem) #projetos_empresas
     df_atual = pd.read_excel(os.path.join(ROOT, 'projeto', 'projetos_empresas', 'step_1_data_raw', 'raw_informacoes_empresas.xlsx')) #informacoes_empresas atual
+    df_atual['novo'] = 'Não'
+    df_atual.to_excel(os.path.join(ROOT, 'projeto', 'projetos_empresas', 'step_1_data_raw', 'raw_informacoes_empresas.xlsx'), index=False)
     info_empresas = pd.read_excel(os.path.join(ROOT, 'projeto', 'projetos_empresas', 'step_1_data_raw', 'raw_empresas.xlsx')) #info_empresas novo
     empresas_contratantes = pd.read_excel(os.path.join(ROOT, 'analises_relatorios', 'empresas_contratantes',
                                                        'step_1_data_raw', 'raw_relatorio_empresas_contratantes_1.xlsx')) #empresas_contratantes
@@ -64,7 +66,7 @@ def criar_tabela_informacoes_empresas():
 
     # Carregar a planilha atual com openpyxl
     wb = openpyxl.load_workbook(os.path.join(ROOT, 'projeto', 'projetos_empresas', 'step_1_data_raw', 'raw_informacoes_empresas.xlsx'))
-    ws = wb['Planilha1']
+    ws = wb['Sheet1']
 
     # Adicionar novos registros ao final da planilha atual
     for _, row in novos_registros.iterrows():
@@ -75,7 +77,7 @@ def criar_tabela_informacoes_empresas():
     wb.save(caminho_temp)
 
     # Recarregar a planilha temporária com pandas para reordenar
-    df_final = pd.read_excel(caminho_temp, sheet_name='Planilha1')
+    df_final = pd.read_excel(caminho_temp, sheet_name='Sheet1')
 
     # Criar colunas auxiliares para priorizar "Não definido"
     df_final['Novo Prioridade'] = df_final['novo'].apply(lambda x: 0 if x == "Sim" else 1)

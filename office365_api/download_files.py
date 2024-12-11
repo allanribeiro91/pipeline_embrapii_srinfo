@@ -25,7 +25,7 @@ def get_file(sharepoint_site, sharepoint_site_name, sharepoint_doc, file_n, fold
     save_file(file_n, file_obj, dest)
 
 def get_files(sharepoint_site, sharepoint_site_name, sharepoint_doc, folder, dest):
-    # print(f'Debug: Listando arquivos na pasta -> {folder}')
+    # print(f'Debug: Listando arquivos na pasta ->{sharepoint_site} - {sharepoint_site_name} - {folder}')
     files_list = SharePoint()._get_files_list(sharepoint_site, sharepoint_doc, folder)
     for file in files_list:
         get_file(sharepoint_site, sharepoint_site_name, sharepoint_doc, file.name, folder, dest)

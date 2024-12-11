@@ -1,6 +1,7 @@
 import os
 import sys
 from dotenv import load_dotenv
+import pandas as pd
 
 #carregar .env
 load_dotenv()
@@ -28,8 +29,9 @@ from criar_tabela_ue_linhas_atuacao import criar_tabela_ue_linhas_atuacao
 def main_equipe_ue(driver):
     link = 'https://srinfo.embrapii.org.br/people/list/'
     nome_arquivo = 'equipe_ue'
-    baixar_e_juntar_arquivos(driver, link, CURRENT_DIR, nome_arquivo)
-    processar_dados()
+    # baixar_e_juntar_arquivos(driver, link, CURRENT_DIR, nome_arquivo)
+    # processar_dados()
+    ajustar_equipe_ue()
     copiar_arquivos_finalizados_para_dwpii(DIRETORIO_ARQUIVOS_FINALIZADOS)
 
 
@@ -71,6 +73,44 @@ novos_nomes_e_ordem = {
 def processar_dados():
     processar_excel(arquivo_origem, campos_interesse, novos_nomes_e_ordem, arquivo_destino)
 
+
+def ajustar_equipe_ue(arquivo_destino=arquivo_destino):
+    equipe_ue = pd.read_excel(arquivo_destino)
+
+    nivel_titulacao = {
+        'Ensino Médio': 1,
+        'Nível Técnico': 2,
+        'Graduação': 3,
+        'Especialização': 4,
+        'Mestrado': 5,
+        'Doutorado': 6,
+        'Pós-Doutorado': 7,
+    }
+
+    # Etapa 1: Criar a coluna 'ano_entrada' a partir da coluna 'data_entrada'
+    equipe_ue['ano_entrada'] = pd.to_datetime(equipe_ue['data_entrada'], dayfirst=True, errors='coerce').dt.year
+
+    # Etapa 2: Analisar os valores da coluna 'cpf' para cada ano e ajustar o nível de titulação
+    def obter_maior_titulacao(grupo):
+        idx_maior_titulacao = grupo['titulacao'].map(nivel_titulacao).idxmax()
+        return grupo.loc[idx_maior_titulacao]
+
+    equipe_ue = equipe_ue.groupby(['ano_entrada', 'cpf'], group_keys=False).apply(obter_maior_titulacao)
+    equipe_ue['titulacao_maior'] = equipe_ue['titulacao']
+
+    # Etapa 3: Criar a coluna 'titulacao_maior_simp'
+    def simplificar_titulacao(titulacao):
+        if titulacao in ['Ensino Médio', 'Nível Técnico']:
+            return 'Médio/Técnico'
+        elif titulacao == 'Graduação':
+            return 'Graduação'
+        else:
+            return 'Pós-Graduação'
+
+    equipe_ue['titulacao_maior_simp'] = equipe_ue['titulacao_maior'].apply(simplificar_titulacao)
+
+    # Salvar o resultado no local parametrizado em "arquivo_destino"
+    equipe_ue.to_excel(arquivo_destino, index=False)
 
 if __name__ == "__main__":
     main_equipe_ue()

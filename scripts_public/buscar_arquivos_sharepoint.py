@@ -33,10 +33,11 @@ def buscar_arquivos_sharepoint():
     apagar_arquivos_pasta(CURRENT_DIR)
     apagar_arquivos_pasta(DWPII_UP)
     apagar_arquivos_pasta(DWPII_BACKUP)
-
+    
     get_file(SHAREPOINT_SITE_SEBRAE, SHAREPOINT_SITE_NAME_SEBRAE, SHAREPOINT_DOC_SEBRAE, "sebrae_bi_interno_base_2.0.xlsx",
               "Contratos SEBRAE/Transferência de Atividades (Handsover)/", CURRENT_DIR)
     get_files(SHAREPOINT_SITE, SHAREPOINT_SITE_NAME, SHAREPOINT_DOC, "DWPII/srinfo", CURRENT_DIR)
+    print('Passou aqui')
 
 
 #Executar função

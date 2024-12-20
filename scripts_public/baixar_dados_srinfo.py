@@ -75,7 +75,7 @@ def baixar_dados_srinfo(driver, link_listagem, num_pages = None, option1000 = No
         if num_pages == None:
             valor = soup.find('a', {'data-dt-idx': '5'})
 
-            if valor:    
+            if valor and isinstance(valor, int):    
                 # Extrair o número de páginas
                 num_pages = int(valor.text)
             else:

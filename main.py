@@ -86,6 +86,10 @@ def main_pipeline_srinfo(plano_metas = False, gerar_snapshot = False, enviar_wpp
 
     #Projetos
     print('Subseção: Projetos')
+
+    main_sebrae(driver)
+    log = logear(log, 'sebrae')
+
     main_projetos_contratados(driver)
     log = logear(log, 'projetos_contratados')
 
@@ -106,9 +110,6 @@ def main_pipeline_srinfo(plano_metas = False, gerar_snapshot = False, enviar_wpp
 
     main_macroentregas(driver)
     log = logear(log, 'macroentregas')
-
-    main_sebrae(driver)
-    log = logear(log, 'sebrae')
 
     main_comunicacao(driver)
     log = logear(log, 'comunicacao')

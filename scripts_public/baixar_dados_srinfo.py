@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 # Carregar variáveis de ambiente do arquivo .env
 load_dotenv()
 
-def baixar_dados_srinfo(driver, link_listagem, num_pages = None, option1000 = None):
+def baixar_dados_srinfo(driver, link_listagem, num_pages = None, option1000 = None, sebrae = False):
 
     username = os.getenv('USERNAME')
     password = os.getenv('PASSWORD')
@@ -62,8 +62,13 @@ def baixar_dados_srinfo(driver, link_listagem, num_pages = None, option1000 = No
             option = WebDriverWait(driver, 10).until(
                 EC.element_to_be_clickable((By.XPATH, "//option[@value='9999']"))
                 )
+            
+        if sebrae:
+            time.sleep(15)
+            option.click()
         
-        option.click()
+        else:
+            option.click()
 
         carregar_dados_e_fazer_download(driver=driver)
         numero_download = 1

@@ -27,7 +27,7 @@ from scripts_public.processar_excel import processar_excel
 def main_sebrae(driver):
     link = 'https://srinfo.embrapii.org.br/partnerships/sebrae_4_contrato/list'
     nome_arquivo = 'sebrae_srinfo'
-    baixar_e_juntar_arquivos(driver, link, CURRENT_DIR, nome_arquivo, num_pages=1)
+    baixar_e_juntar_arquivos(driver, link, CURRENT_DIR, nome_arquivo, num_pages=1, sebrae = True)
     processar_dados()
     copiar_arquivos_finalizados_para_dwpii(DIRETORIO_ARQUIVOS_FINALIZADOS)
 

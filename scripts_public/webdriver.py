@@ -16,5 +16,7 @@ def configurar_webdriver():
     options.add_argument('--disable-extensions')
     options.add_argument('log-level=3')
     options.add_argument('--remote-debugging-port=0')
+    options.add_argument("--incognito")  # Modo anônimo
+    options.add_argument("--disable-cache")
     driver = webdriver.Edge(service=edge_service, options=options)
     return driver

@@ -18,12 +18,16 @@ ROOT = os.getenv('ROOT')
 CURRENT_DIR = os.path.abspath(os.path.join(ROOT, 'analises_relatorios', 'empresas_contratantes'))
 SCRIPTS_PATH = os.path.abspath(os.path.join(CURRENT_DIR, 'scripts'))
 SCRIPTS_PUBLIC_PATH = os.path.abspath(os.path.join(ROOT, 'scripts_public'))
+DIRETORIO_ARQUIVOS_FINALIZADOS = os.path.abspath(os.path.join(CURRENT_DIR, 'step_3_data_processed'))
 
 #Adicionar caminhos ao sys.path
 sys.path.append(SCRIPTS_PUBLIC_PATH)
 sys.path.append(CURRENT_DIR)
 
 from mover_arquivos import mover_arquivos_excel
+from scripts_public.processar_excel import processar_excel
+from scripts_public.copiar_arquivos_finalizados_para_dwpii import copiar_arquivos_finalizados_para_dwpii
+
 # from scripts.baixar_dados_srinfo import baixar_dados_srinfo_empresas_contratantes
 
 def main_empresas_contratantes(driver):
@@ -31,6 +35,8 @@ def main_empresas_contratantes(driver):
     pasta_download = os.getenv('PASTA_DOWNLOAD')
     nome_arquivo = 'raw_relatorio_empresas_contratantes'
     mover_arquivos_excel(1, pasta_download, CURRENT_DIR, nome_arquivo)
+    processar_dados_empresas_contratantes()
+    copiar_arquivos_finalizados_para_dwpii(DIRETORIO_ARQUIVOS_FINALIZADOS)
 
 
 
@@ -117,6 +123,57 @@ def carregar_dados_e_fazer_download(driver):
     )
     excel_button.click()
     time.sleep(3)
+
+
+# Definições dos caminhos e nomes de arquivos
+origem = os.path.join(os.path.join(ROOT, 'analises_relatorios', 'empresas_contratantes', 'step_1_data_raw'))
+destino = os.path.join(ROOT, 'analises_relatorios', 'empresas_contratantes', 'step_3_data_processed')
+nome_arquivo = "empresas_contratantes.xlsx"
+arquivo_origem = os.path.join(origem, 'raw_relatorio_empresas_contratantes_1.xlsx')
+arquivo_destino = os.path.join(destino, nome_arquivo)
+
+# Campos de interesse e novos nomes das colunas
+campos_interesse = [
+    'Empresa',
+    'CNPJ',
+    'CNAE', 
+    'CNAE - Atribuição',
+    'Número Projetos',
+    'Unidades',
+    'Projetos',
+    'Parcerias / Programas',
+    'Calls',
+    'Modalidade de financiamento',
+    'Cooperação Internacional',
+    'Faixa de faturamento declarada',
+    'Faixa de empregados declarada',
+    'Contatos declarados',
+    'E-mails de contatos declarados',
+    'Telefone de contato declarados'
+]
+
+novos_nomes_e_ordem = {
+    'CNPJ': 'cnpj',
+    'Empresa': 'empresa',
+    'CNAE': 'cnae', 
+    'CNAE - Atribuição': 'nome_cnae',
+    'Número Projetos': 'numero_projetos',
+    'Unidades': 'unidades_embrapii',
+    'Projetos': 'codigo_projetos',
+    'Parcerias / Programas': 'parcerias_programas',
+    'Calls': 'calls',
+    'Modalidade de financiamento': 'modalidades_financiamento',
+    'Cooperação Internacional': 'cooperacao_internacional',
+    'Faixa de faturamento declarada': 'faixa_faturamento',
+    'Faixa de empregados declarada': 'faixa_empregados',
+    'Contatos declarados': 'contatos',
+    'E-mails de contatos declarados': 'emails_contatos',
+    'Telefone de contato declarados': 'telefones_contatos'
+}
+
+
+def processar_dados_empresas_contratantes():
+    processar_excel(arquivo_origem, campos_interesse, novos_nomes_e_ordem, arquivo_destino)
 
 #Executar função
 if __name__ == "__main__":

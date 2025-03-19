@@ -12,6 +12,7 @@ SCRIPTS_PUBLIC_PATH = os.path.abspath(os.path.join(ROOT, 'scripts_public'))
 CURRENT_DIR = os.path.abspath(os.path.join(ROOT, 'projeto', 'sebrae'))
 SCRIPTS_PATH = os.path.abspath(os.path.join(CURRENT_DIR, 'scripts'))
 DIRETORIO_ARQUIVOS_FINALIZADOS = os.path.abspath(os.path.join(CURRENT_DIR, 'step_3_data_processed'))
+pasta_download = os.getenv('PASTA_DOWNLOAD')
 
 #Adicionar caminhos ao sys.path
 sys.path.append(PATH_ROOT)
@@ -19,15 +20,22 @@ sys.path.append(SCRIPTS_PUBLIC_PATH)
 sys.path.append(CURRENT_DIR)
 
 #Importar módulos necessários
-from scripts_public.scripts_public import baixar_e_juntar_arquivos
 from scripts_public.copiar_arquivos_finalizados_para_dwpii import copiar_arquivos_finalizados_para_dwpii
 from scripts_public.processar_excel import processar_excel
+from scripts_public.baixar_dados_srinfo import baixar_dados_srinfo
+from scripts_public.mover_arquivos import mover_arquivos_excel
+from scripts_public.append_arquivos import append_excel_files
 
 #Definição da função
 def main_sebrae(driver):
-    link = 'https://srinfo.embrapii.org.br/partnerships/sebrae_4_contrato/list'
-    nome_arquivo = 'sebrae_srinfo'
-    baixar_e_juntar_arquivos(driver, link, CURRENT_DIR, nome_arquivo, num_pages=1, sebrae = True)
+    link1 = 'https://srinfo.embrapii.org.br/partnerships/sebrae_4_contrato/list'
+    link2 = 'https://srinfo.embrapii.org.br/partnerships/sebrae_ciclo_integrado/list'
+    link3 = 'https://srinfo.embrapii.org.br/partnerships/sebrae_ciclo_2/list'
+    baixar_dados_srinfo(driver, link1, 1, sebrae = True)
+    baixar_dados_srinfo(driver, link2, 1, sebrae = True)
+    baixar_dados_srinfo(driver, link3, 1, sebrae = True)
+    mover_arquivos_excel(3, pasta_download, CURRENT_DIR, 'sebrae_srinfo1')
+    append_excel_files(CURRENT_DIR, 'sebrae_srinfo')
     processar_dados()
     copiar_arquivos_finalizados_para_dwpii(DIRETORIO_ARQUIVOS_FINALIZADOS)
 

@@ -23,7 +23,7 @@ def atualizacao_classificao_projeto():
                       'Amazônia', 'Descarbonização', 'Brasil Mais Produtivo',
                       'Biocombustíveis', 'Energia Renovável', 'saude_pdil_mdpts', 'NIB5_Modificado',
                       'Energia Eólica', 'Fertilizantes', 'Tecnologias Verdes', 'Descarbonizacao_Cimento_Siderurgia',
-                      'Sistema de Alerta Climático']
+                      'Sistema de Alerta Climático', 'Plástico']
     classificacoes_com_codigo = classificacoes + ['Código']
     df_merge = df_new.merge(df_atual[classificacoes_com_codigo], on='Código', how='left')
 
@@ -69,7 +69,8 @@ def atualizacao_classificao_projeto():
         'Fertilizantes',
         'Tecnologias Verdes',
         'Descarbonizacao_Cimento_Siderurgia',
-        'Sistema de Alerta Climático'
+        'Sistema de Alerta Climático',
+        'Plástico'
     ]
 
     df_merge = df_merge[colunas_ordenadas]
